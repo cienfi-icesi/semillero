@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semillero CIENFI · Taller de papers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --azul:#395CE0; --azul-h:#2743B8; --azul-bg:#EEF1FD;
+ --negro:#000000; --gris-o:#5A5C61; --gris:#88898C; --gris-c:#C9CCD4;
+ --neutro:#F7F8FA; --blanco:#FFFFFF; --borde:#E6E8EC;
+ --v1:#1F3A8F; --v2:#395CE0; --v3:#7A93F0; --v4:#0E7C86; --v5:#C0562F;
+ --s1:4px;--s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--s7:64px;
+ --r:8px; --r-lg:10px;
+ --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--blanco);color:var(--negro);
+ font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+ font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;line-height:1.1;font-weight:700;letter-spacing:-.02em}
+h1{font-size:34px} h2{font-size:23px;font-weight:600;letter-spacing:-.01em} h3{font-size:18px;font-weight:600;letter-spacing:0}
+p{margin:0}
+a{color:var(--azul);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--s6)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);margin-bottom:var(--s2)}
+.lead{font-size:16px;color:var(--gris-o);max-width:68ch}
+.small{font-size:13px;color:var(--gris)}
+/* ---- header ---- */
+header.site{border-bottom:1px solid var(--borde);position:sticky;top:0;z-index:60;background:rgba(255,255,255,.94);backdrop-filter:blur(8px)}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:var(--s4);padding:var(--s3) 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:20px}
+.b-cienfi{font-size:21px;font-weight:700;letter-spacing:.02em;color:var(--v1)}
+.b-cienfi small{display:block;font-size:9px;font-weight:500;letter-spacing:.02em;color:var(--gris-o);line-height:1.25;letter-spacing:0}
+.b-div{width:1px;height:30px;background:var(--gris-c)}
+.b-icesi{font-size:13px;font-weight:600;color:var(--v1);letter-spacing:.01em}
+.b-icesi small{display:block;font-size:8.5px;font-weight:400;color:var(--gris)}
+.b-ctx{font-family:var(--mono);font-size:11px;color:var(--gris);letter-spacing:.06em;text-transform:uppercase}
+nav.main{display:flex;gap:var(--s1);overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+nav.main::-webkit-scrollbar{display:none}
+nav.main button{appearance:none;border:0;background:none;font:inherit;font-size:14px;font-weight:500;color:var(--gris-o);
+ padding:9px 14px;border-radius:var(--r);cursor:pointer;white-space:nowrap;min-height:40px}
+nav.main button:hover{background:var(--neutro);color:var(--negro)}
+nav.main button[aria-selected="true"]{background:var(--azul-bg);color:var(--azul);font-weight:600}
+/* ---- sections ---- */
+main section[hidden]{display:none}
+.pagehead{padding:var(--s7) 0 var(--s5)}
+.block{padding-bottom:var(--s7)}
+.rule{border:0;border-top:1px solid var(--borde);margin:0 0 var(--s5)}
+.grid{display:grid;gap:var(--s3)}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r-lg);padding:var(--s4)}
+.card.flat{background:var(--neutro);border-color:transparent}
+.kpi{border:1px solid var(--borde);border-radius:var(--r-lg);padding:var(--s3) var(--s4)}
+.kpi .n{font-size:32px;font-weight:700;letter-spacing:-.03em;line-height:1}
+.kpi .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris);margin-top:6px}
+/* ---- badges ---- */
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;
+ border:1px solid var(--gris-c);color:var(--gris-o);background:var(--blanco);white-space:nowrap}
+.badge.on{background:var(--azul-bg);border-color:#D6DEFB;color:var(--azul)}
+.badge.dot::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;padding:2px 7px;border-radius:4px;
+ background:var(--neutro);border:1px solid var(--borde);color:var(--gris-o);white-space:nowrap}
+.tag.m{background:var(--azul-bg);border-color:#DDE3FC;color:var(--azul)}
+/* ---- toolbar ---- */
+.toolbar{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:flex-end;margin-bottom:var(--s3)}
+.field{display:flex;flex-direction:column;gap:6px;min-width:170px}
+.field.grow{flex:1;min-width:240px}
+.field label{font-size:12px;font-weight:700;letter-spacing:.02em;color:var(--gris-o)}
+.control{position:relative;display:flex;align-items:center}
+.control .ic{position:absolute;left:11px;color:var(--gris);pointer-events:none}
+input[type=search],input[type=text],input[type=date],select,textarea{
+ font:inherit;font-size:14px;padding:10px 12px;border:1px solid var(--gris-c);border-radius:var(--r);
+ background:var(--blanco);color:var(--negro);width:100%;min-height:44px}
+input[type=search]{padding-left:36px}
+textarea{min-height:80px;resize:vertical;line-height:1.5}
+select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%2388898C' stroke-width='1.5'><path d='m4 6 4 4 4-4'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);align-items:center}
+.chip{appearance:none;font:inherit;font-size:13px;font-weight:500;padding:8px 13px;min-height:40px;
+ border:1px solid var(--gris-c);border-radius:99px;background:var(--blanco);color:var(--gris-o);cursor:pointer}
+.chip:hover{border-color:var(--azul);color:var(--azul)}
+.chip[aria-pressed="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+.btn{appearance:none;font:inherit;font-size:14px;font-weight:600;padding:11px 18px;min-height:44px;
+ border-radius:var(--r);border:1px solid var(--azul);background:var(--azul);color:#fff;cursor:pointer}
+.btn:hover{background:var(--azul-h);border-color:var(--azul-h)}
+.btn.sec{background:var(--blanco);color:var(--negro);border-color:var(--gris-c)}
+.btn.sec:hover{background:var(--neutro);border-color:var(--gris)}
+.btn:disabled{background:var(--neutro);border-color:var(--borde);color:var(--gris-c);cursor:not-allowed}
+.count{font-family:var(--mono);font-size:12px;color:var(--gris);margin:0 0 var(--s2)}
+/* ---- tabla literatura ---- */
+.tbl-scroll{border:1px solid var(--borde);border-radius:var(--r-lg);overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+#tbl table{min-width:1010px;table-layout:fixed}
+#tbl th:nth-child(1){width:30%} #tbl th:nth-child(2){width:15%} #tbl th:nth-child(3){width:62px}
+#tbl th:nth-child(4){width:19%} #tbl th:nth-child(5){width:13%} #tbl th:nth-child(6){width:104px}
+#tbl th:nth-child(7){width:56px}
+thead th{position:sticky;top:0;background:var(--neutro);text-align:left;font-size:12px;font-weight:700;color:var(--gris-o);
+ padding:0;border-bottom:1px solid var(--borde);white-space:nowrap;z-index:2}
+th .th-btn{appearance:none;border:0;background:none;font:inherit;color:inherit;cursor:pointer;
+ display:flex;align-items:center;gap:6px;padding:12px 14px;width:100%;min-height:44px}
+th .th-btn:hover{color:var(--azul)}
+th.plain{padding:12px 14px}
+.arrow{font-family:var(--mono);font-size:11px;color:var(--gris-c)}
+tbody td{padding:13px 14px;border-bottom:1px solid var(--borde);vertical-align:top;font-size:14px}
+tbody tr:last-child td{border-bottom:0}
+tr.row:hover{background:var(--neutro)}
+tr.detail > td{background:var(--neutro);padding:0;border-bottom:1px solid var(--borde)}
+tr.detail[hidden]{display:none}
+.t-title{font-weight:600;font-size:14.5px;line-height:1.35;text-wrap:pretty}
+.t-au{font-size:12.5px;color:var(--gris);margin-top:3px}
+.t-out{font-size:13px;color:var(--gris-o)}
+.c-year,.c-jour{font-size:13px;color:var(--gris-o)}
+.c-doi .lnk{font-size:13px;font-weight:600;white-space:nowrap}
+.c-doi .doi{display:block;font-family:var(--mono);font-size:10.5px;color:var(--gris-c);margin-top:3px}
+.exp-btn{appearance:none;border:1px solid var(--gris-c);background:var(--blanco);border-radius:var(--r);
+ width:34px;height:34px;display:grid;place-items:center;cursor:pointer;color:var(--gris-o)}
+.exp-btn:hover{border-color:var(--azul);color:var(--azul)}
+.exp-btn[aria-expanded="true"]{background:var(--azul);border-color:var(--azul);color:#fff}
+.exp-btn[aria-expanded="true"] svg{transform:rotate(180deg)}
+.d-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:var(--s4);padding:var(--s4)}
+.d-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);margin-bottom:5px}
+.d-box{border-left:2px solid var(--azul);padding-left:14px;margin-bottom:var(--s3)}
+.d-box p,.d-p{font-size:14px;color:var(--gris-o);line-height:1.55}
+.d-box p b,.d-p b{color:var(--negro)}
+.empty{border:1px dashed var(--gris-c);border-radius:var(--r-lg);padding:var(--s5);text-align:center;color:var(--gris);font-size:14px}
+/* ---- lectura ---- */
+.pass{border:1px solid var(--borde);border-radius:var(--r-lg);overflow:hidden;margin-bottom:var(--s3)}
+.pass > header{display:flex;align-items:baseline;gap:var(--s3);padding:var(--s3) var(--s4);background:var(--neutro);border-bottom:1px solid var(--borde);flex-wrap:wrap}
+.pass > header .n{font-family:var(--mono);font-size:12px;color:var(--azul);font-weight:500}
+.pass > header h3{flex:1;min-width:200px}
+.pass > header .t{font-family:var(--mono);font-size:11.5px;color:var(--gris)}
+.pass .body{padding:var(--s4)}
+.pass .body > p{max-width:72ch;color:var(--gris-o);margin-bottom:var(--s3)}
+.anat{display:grid;grid-template-columns:auto 1fr;gap:0;border-top:1px solid var(--borde);margin-top:var(--s3)}
+.anat dt{font-family:var(--mono);font-size:11px;color:var(--azul);padding:11px 16px 11px 0;border-bottom:1px solid var(--borde);white-space:nowrap;font-weight:500}
+.anat dd{margin:0;padding:11px 0;border-bottom:1px solid var(--borde);font-size:14px;color:var(--gris-o)}
+.anat dd b{color:var(--negro);font-weight:600}
+.doit{margin-top:var(--s3);background:var(--azul-bg);border-radius:var(--r);padding:14px 16px;font-size:14px;color:var(--gris-o)}
+.doit b{color:var(--azul)}
+.warn{border:1px solid var(--gris-c);border-radius:var(--r);padding:14px 16px;font-size:14px;color:var(--gris-o);margin-top:var(--s3)}
+ul.tight{margin:0;padding-left:18px;color:var(--gris-o)}
+ul.tight li{margin-bottom:6px}
+ul.tight li b,ul.tight li strong{color:var(--negro)}
+/* ---- cronograma ---- */
+.wk{display:grid;grid-template-columns:190px 1fr;gap:var(--s4);padding:var(--s4) 0;border-top:1px solid var(--borde)}
+.wk .when .s{font-size:17px;font-weight:700}
+.wk .when .d{font-family:var(--mono);font-size:11.5px;color:var(--gris);margin-top:3px}
+.wk .when .m{margin-top:10px}
+.wk h3{margin-bottom:var(--s2)}
+.wk ul{margin:0 0 var(--s3);padding-left:18px;color:var(--gris-o);font-size:14px}
+.wk li{margin-bottom:6px}
+.wk li b{color:var(--negro)}
+.ent{font-size:13.5px;color:var(--gris-o);border-left:2px solid var(--azul);padding-left:12px}
+.ent b{color:var(--azul);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px}
+/* ---- horarios ---- */
+.hgrid{border:1px solid var(--borde);border-radius:var(--r-lg);overflow-x:auto}
+.hgrid table{min-width:640px}
+.hgrid td.cell{text-align:center;font-family:var(--mono);font-size:13px;padding:0}
+.hgrid td.cell .v{display:block;padding:12px 6px;border-radius:0}
+.h0{color:var(--gris-c)} .h1{background:#F4F6FE;color:var(--gris-o)} .h2{background:#DDE4FB;color:var(--v1)}
+.h3{background:#B9C6F7;color:var(--v1);font-weight:600} .h5{background:var(--azul);color:#fff;font-weight:600}
+.hx{background:repeating-linear-gradient(45deg,#F7F8FA,#F7F8FA 4px,#EDEEF1 4px,#EDEEF1 8px);color:var(--gris-c)}
+.hgrid th.rowh{font-weight:600;color:var(--negro);background:var(--neutro)}
+/* ---- avances ---- */
+.bar{height:6px;background:var(--neutro);border:1px solid var(--borde);border-radius:99px;overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--azul)}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px;border:1px solid}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st0{border-color:var(--gris-c);color:var(--gris)}
+.st1{border-color:#C9CCD4;color:var(--v5);background:#FDF3EF}
+.st2{border-color:#B7DCDF;color:var(--v4);background:#EAF6F7}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--s3)}
+.fgrid .full{grid-column:1/-1}
+.sync{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--gris)}
+.sync.ok{color:var(--v4)} .sync.err{color:var(--v5)}
+code{font-family:var(--mono);font-size:12.5px;background:var(--neutro);padding:1px 5px;border-radius:4px;border:1px solid var(--borde)}
+pre{font-family:var(--mono);font-size:12px;line-height:1.55;background:var(--neutro);border:1px solid var(--borde);
+ border-radius:var(--r);padding:var(--s3);overflow-x:auto;margin:var(--s3) 0 0}
+footer.site{border-top:1px solid var(--borde);padding:var(--s5) 0;margin-top:var(--s6)}
+.foot{display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:center}
+@media(max-width:900px){
+ .d-grid{grid-template-columns:1fr}
+ .wk{grid-template-columns:1fr;gap:var(--s3)}
+}
+@media(max-width:768px){
+ .wrap{padding:0 20px}
+ h1{font-size:27px} h2{font-size:20px}
+ .pagehead{padding:var(--s5) 0 var(--s4)}
+ .block{padding-bottom:var(--s6)}
+}
+</style>
+</head>
+<body>
+<header class="site">
+ <div class="wrap">
+  <div class="brandbar">
+   <div class="brand">
+    <div class="b-cienfi">CIENFI<small>Centro de Investigación<br>en Economía y Finanzas</small></div>
+    <div class="b-div"></div>
+    <div class="b-icesi">Universidad<small>Icesi</small></div>
+   </div>
+   <div class="b-ctx">Semillero · Taller de papers · Sep 2026</div>
+  </div>
+  <nav class="main" role="tablist">
+   <button role="tab" data-tab="inicio" aria-selected="true">Inicio</button>
+   <button role="tab" data-tab="literatura" aria-selected="false">Literatura</button>
+   <button role="tab" data-tab="equipos" aria-selected="false">Equipos</button>
+   <button role="tab" data-tab="lectura" aria-selected="false">Cómo leer un paper</button>
+   <button role="tab" data-tab="cronograma" aria-selected="false">Cronograma</button>
+   <button role="tab" data-tab="horarios" aria-selected="false">Horarios</button>
+   <button role="tab" data-tab="avances" aria-selected="false">Avances</button>
+  </nav>
+ </div>
+</header>
+<main>
+
+<!-- ================= INICIO ================= -->
+<section id="inicio">
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Semillero CIENFI</div>
+   <h1>Taller de papers</h1>
+   <p class="lead" style="margin-top:12px">Cada equipo escoge un paper, lo lee hasta poder defenderlo y lo convierte en una infografía.</p>
+  </div>
+
+  <div class="block">
+   <div class="grid g4">
+    <div class="kpi"><div class="n">9</div><div class="l">Integrantes</div></div>
+    <div class="kpi"><div class="n">4</div><div class="l">Líneas</div></div>
+    <div class="kpi"><div class="n">4</div><div class="l">Equipos</div></div>
+    <div class="kpi"><div class="n">35</div><div class="l">Papers</div></div>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Líneas de investigación</div>
+   <hr class="rule">
+   <div class="grid g2" id="lineasOut"></div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Intereses registrados</div>
+   <hr class="rule">
+   <div class="tbl-scroll">
+    <table><thead><tr>
+     <th class="plain">Integrante</th><th class="plain">Programa</th><th class="plain">Sem.</th>
+     <th class="plain">Tema escogido</th><th class="plain">Línea</th>
+    </tr></thead><tbody id="intOut"></tbody></table>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= LITERATURA ================= -->
+<section id="literatura" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Revisión de literatura</div>
+   <h1>35 papers</h1>
+   <p class="lead" style="margin-top:12px">Priorizados por identificación causal y por journal. DOI verificados contra Crossref.</p>
+  </div>
+
+  <div class="chips" style="margin-bottom:var(--s4)" id="litTabs" role="group" aria-label="Línea de investigación"></div>
+
+  <div class="toolbar">
+   <div class="field grow">
+    <label for="q">Buscar</label>
+    <div class="control">
+     <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+     <input id="q" type="search" placeholder="Autor, título, outcome, pregunta…" autocomplete="off">
+    </div>
+   </div>
+   <div class="field"><label for="fm">Metodología</label><div class="control"><select id="fm"></select></div></div>
+   <div class="field"><label for="fj">Journal</label><div class="control"><select id="fj"></select></div></div>
+   <div class="field"><label for="fo">Outcome</label><div class="control"><select id="fo"></select></div></div>
+   <div class="field" style="min-width:auto"><label class="sr" for="reset">Limpiar</label><button class="btn sec" id="reset" type="button">Limpiar</button></div>
+  </div>
+
+  <p class="count" id="count" role="status" aria-live="polite"></p>
+  <div class="tbl-scroll" id="tbl">
+   <table>
+    <caption class="sr">Papers de la revisión. Las columnas con botón permiten ordenar. Cada fila se expande con el detalle.</caption>
+    <thead><tr>
+     <th data-s="t" aria-sort="none" scope="col"><button class="th-btn" type="button">Estudio<span class="arrow">↕</span></button></th>
+     <th data-s="j" aria-sort="none" scope="col"><button class="th-btn" type="button">Journal<span class="arrow">↕</span></button></th>
+     <th data-s="yr" aria-sort="none" scope="col"><button class="th-btn" type="button">Año<span class="arrow">↕</span></button></th>
+     <th data-s="out" aria-sort="none" scope="col"><button class="th-btn" type="button">Outcome<span class="arrow">↕</span></button></th>
+     <th data-s="m" aria-sort="none" scope="col"><button class="th-btn" type="button">Identificación<span class="arrow">↕</span></button></th>
+     <th class="plain" scope="col">DOI</th>
+     <th class="plain" scope="col"><span class="sr">Detalle</span></th>
+    </tr></thead>
+    <tbody id="tbody"></tbody>
+   </table>
+  </div>
+  <div class="empty" id="empty" hidden>Ningún paper coincide con estos filtros.</div>
+  <div style="height:var(--s7)"></div>
+ </div>
+</section>
+
+<!-- ================= EQUIPOS ================= -->
+<section id="equipos" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Conformación</div>
+   <h1>Equipos</h1>
+   <p class="lead" style="margin-top:12px">Agrupados por afinidad temática. Cada equipo escoge un paper de su lista.</p>
+  </div>
+  <div id="eqOut" class="block"></div>
+ </div>
+</section>
+
+<!-- ================= CÓMO LEER UN PAPER ================= -->
+<section id="lectura" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Método de lectura</div>
+   <h1>Cómo leer un paper</h1>
+   <p class="lead" style="margin-top:12px">Un paper de economía no se lee de principio a fin. Se lee en capas, y cada capa tiene una pregunta distinta.</p>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Antes de empezar</div>
+   <hr class="rule">
+   <div class="grid g2">
+    <div>
+     <h3>El orden en que está escrito no es el orden en que se lee</h3>
+     <p class="lead" style="margin-top:10px;font-size:15px">Un paper está organizado para <b>convencer a un referee</b>, no para enseñarle a alguien que llega por primera vez. Por eso el argumento completo aparece tres veces con distinto nivel de detalle: comprimido en el abstract, contado entero en la introducción, y demostrado en el cuerpo. Leer de corrido significa recorrer el mismo argumento tres veces sin darse cuenta.</p>
+     <p class="lead" style="margin-top:12px;font-size:15px">La consecuencia práctica: con el abstract, la introducción y la conclusión ya tienes el <b>90% del contenido</b> del paper. El cuerpo no agrega ideas nuevas, agrega la evidencia de que las ideas son ciertas. Se lee después, y solo donde importa.</p>
+    </div>
+    <div class="card flat">
+     <div class="d-h">Para qué sirve cada sección</div>
+     <dl class="anat" style="margin-top:8px">
+      <dt>Abstract</dt><dd>El paper en 5 frases. <b>Se lee siempre.</b></dd>
+      <dt>Introducción</dt><dd>El argumento completo en prosa. <b>Es la sección más importante.</b></dd>
+      <dt>Literatura</dt><dd>Contra quién discute el autor. Se hojea.</dd>
+      <dt>Contexto</dt><dd>La institución o el evento que genera la variación. Se lee si el diseño no se entiende.</dd>
+      <dt>Datos</dt><dd>Qué se observa, de quién, cuándo. <b>Se lee.</b></dd>
+      <dt>Estrategia</dt><dd>Cómo se identifica el efecto. <b>Se lee con lápiz.</b></dd>
+      <dt>Resultados</dt><dd>La tabla que carga el argumento. <b>Se lee.</b></dd>
+      <dt>Robustez</dt><dd>Respuestas a críticas anticipadas. Se hojea buscando cuál crítica temía el autor.</dd>
+      <dt>Mecanismos</dt><dd>Por qué ocurre el efecto. Se lee.</dd>
+      <dt>Conclusión</dt><dd>Qué afirma y qué <b>no</b> afirma el autor. Se lee.</dd>
+      <dt>Apéndice</dt><dd>Donde está lo que no cupo. Se abre solo si algo no cuadra.</dd>
+     </dl>
+    </div>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Las tres pasadas</div>
+   <hr class="rule">
+
+   <div class="pass">
+    <header><span class="n">PASADA 01</span><h3>El argumento: abstract, introducción y conclusión</h3><span class="t">≈ 60 min</span></header>
+    <div class="body">
+     <p>No abras ninguna otra sección. El objetivo de esta pasada no es entender cómo se hizo el estudio, sino <b>qué afirma</b> y <b>por qué alguien debería creerlo</b>. Si terminas esta pasada y no puedes explicarle el paper a alguien en el pasillo, no sigas adelante: vuelve a la introducción.</p>
+
+     <h3 style="margin-top:var(--s4)">1 · El abstract tiene cinco frases y cada una hace un trabajo distinto</h3>
+     <p style="margin-top:8px">Casi todos los abstracts de economía siguen la misma secuencia. Identifícala explícitamente: numera las frases en el margen.</p>
+     <dl class="anat">
+      <dt>Frase 1</dt><dd><b>El problema.</b> Por qué esta pregunta importa o por qué es difícil de responder.</dd>
+      <dt>Frase 2</dt><dd><b>Qué hace el paper.</b> Contexto, datos y período.</dd>
+      <dt>Frase 3</dt><dd><b>La estrategia.</b> De dónde sale la variación que permite hablar de causalidad.</dd>
+      <dt>Frase 4</dt><dd><b>El resultado.</b> Signo, tamaño y unidades.</dd>
+      <dt>Frase 5</dt><dd><b>La implicación.</b> Qué cambia esto para la teoría o la política.</dd>
+     </dl>
+     <div class="doit"><b>Hazlo:</b> escribe al lado de cada frase del abstract cuál de los cinco roles cumple. Si una frase no encaja en ninguno, pregúntate por qué el autor decidió gastar espacio en ella — normalmente es porque anticipa una objeción.</div>
+
+     <h3 style="margin-top:var(--s4)">2 · La introducción tiene una anatomía fija</h3>
+     <p style="margin-top:8px">La introducción de un paper de economía es un género literario con reglas. Casi siempre son entre 6 y 10 párrafos en este orden. Reconocerlos convierte una lectura pasiva en una lectura estructurada: sabes qué estás buscando en cada párrafo.</p>
+     <dl class="anat">
+      <dt>Párrafo 1</dt><dd><b>El gancho.</b> Un hecho, una cifra o una tensión de política. Aquí está la <b>pregunta</b>, casi siempre en la última frase del párrafo.</dd>
+      <dt>Párrafo 2</dt><dd><b>Por qué es difícil.</b> El problema de identificación: por qué una correlación simple no responde la pregunta (selección, causalidad inversa, variable omitida).</dd>
+      <dt>Párrafo 3</dt><dd><b>La solución.</b> "In this paper, I…" — el contexto empírico y la fuente de variación que resuelve ese problema.</dd>
+      <dt>Párrafo 4</dt><dd><b>Los datos.</b> Fuente, cobertura, período, unidad de observación.</dd>
+      <dt>Párrafo 5</dt><dd><b>La estrategia.</b> El método y, sobre todo, <b>el supuesto</b> que hay que creer. A veces incluye ya la defensa de ese supuesto.</dd>
+      <dt>Párrafo 6</dt><dd><b>Los resultados.</b> El número principal, con su magnitud interpretada.</dd>
+      <dt>Párrafo 7</dt><dd><b>Robustez y mecanismos.</b> Qué más hizo el autor para que le creamos, y por qué ocurre el efecto.</dd>
+      <dt>Párrafo 8</dt><dd><b>La contribución.</b> "This paper contributes to three literatures…" Aquí el autor dice <b>contra quién se está posicionando</b> y qué agrega que los otros no tenían.</dd>
+      <dt>Último</dt><dd><b>Roadmap.</b> "Section 2 describes…". Se salta, pero sirve de índice.</dd>
+     </dl>
+     <div class="doit"><b>Hazlo:</b> marca en el PDF el número de párrafo donde está cada elemento. Los dos que más importan son el <b>párrafo 2</b> (por qué es difícil) y el <b>párrafo 5</b> (el supuesto). Si el paper es bueno, esos dos párrafos se responden mutuamente.</div>
+
+     <h3 style="margin-top:var(--s4)">3 · La conclusión: lo que el autor <em>no</em> afirma</h3>
+     <p style="margin-top:8px">La conclusión repite los resultados, pero su parte útil es otra: el párrafo donde el autor acota el alcance. "These results apply to…", "we cannot rule out…", "this is a local effect…". Ahí está, escrito por el propio autor, el material de la crítica. Un referee empieza siempre por ahí.</p>
+     <div class="warn"><b>Prueba de la pasada 1.</b> Sin mirar el paper, escribe tres frases: (i) la pregunta, (ii) el resultado con su número, (iii) por qué la comparación es creíble. Si la tercera no sale, el problema está en el párrafo 5 de la introducción.</div>
+    </div>
+   </div>
+
+   <div class="pass">
+    <header><span class="n">PASADA 02</span><h3>La identificación: datos y estrategia empírica</h3><span class="t">≈ 2 h</span></header>
+    <div class="body">
+     <p>Ahora sí abre el cuerpo, pero solo las secciones de contexto, datos y estrategia empírica. Salta los resultados. El objetivo es una sola cosa: <b>reconstruir de dónde sale la comparación</b>.</p>
+     <ul class="tight" style="margin-top:var(--s3)">
+      <li><b>Unidad de observación.</b> ¿Una persona, una firma, un municipio, un par municipio-año? Todo lo demás depende de esto.</li>
+      <li><b>Tratamiento.</b> ¿Qué pasó exactamente, a quién y en qué fecha? Un tratamiento bien definido es un evento con fecha, no una característica.</li>
+      <li><b>Grupo de comparación.</b> ¿Quiénes son y en qué se parecían a los tratados <em>antes</em> del tratamiento?</li>
+      <li><b>El supuesto.</b> Escríbelo en una frase que empiece con "si no fuera por el tratamiento, entonces…".</li>
+      <li><b>La amenaza.</b> ¿Qué tendría que ser cierto en el mundo para que ese supuesto fallara?</li>
+     </ul>
+     <div class="doit"><b>Hazlo:</b> dibuja la variación a mano. Un DiD son dos líneas y una vertical. Un RD son dos nubes de puntos y un umbral. Un IV son tres cajas y dos flechas. <b>Si no puedes dibujarlo, todavía no lo entendiste</b>, y volver a leer el texto no lo va a arreglar: busca la figura del paper que muestra el diseño.</div>
+     <div class="warn">La ecuación no es la estrategia. La ecuación es la implementación. La estrategia es la respuesta a "¿por qué estas dos cosas son comparables?" — y esa respuesta está en prosa, no en símbolos.</div>
+    </div>
+   </div>
+
+   <div class="pass">
+    <header><span class="n">PASADA 03</span><h3>La evidencia: tablas, magnitudes y robustez</h3><span class="t">≈ 2 h</span></header>
+    <div class="body">
+     <p>Todo paper tiene <b>una</b> tabla y <b>una</b> figura que cargan el argumento. Encuéntralas. Las demás son defensa.</p>
+     <ul class="tight" style="margin-top:var(--s3)">
+      <li><b>Lee la nota al pie de la tabla antes que la tabla.</b> Ahí dice la muestra, el nivel de clusterización de los errores estándar y qué controles entran.</li>
+      <li><b>Identifica la columna preferida.</b> El autor siempre tiene una y la menciona en el texto: "our preferred specification".</li>
+      <li><b>Traduce el coeficiente.</b> No basta con el signo. "0.12 log points" tiene que volverse "aproximadamente 12% más de salario, unos X pesos al mes".</li>
+      <li><b>Mira si el coeficiente se mueve entre columnas.</b> Si cambia mucho al agregar controles, el diseño es frágil.</li>
+      <li><b>Busca la prueba de falsación.</b> Pre-tendencias en un event study, placebos en fechas falsas, saltos en covariables en un RD. Es el argumento más fuerte del paper.</li>
+     </ul>
+     <div class="doit"><b>Hazlo:</b> pregúntate por qué cada tabla de robustez está ahí. Cada una responde a una crítica que el autor <em>anticipó</em> de un referee. Reconstruir esas críticas es reconstruir la conversación que el paper tuvo antes de publicarse.</div>
+    </div>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Lectura avanzada</div>
+   <hr class="rule">
+   <div class="grid g2">
+    <div class="card">
+     <h3>Leer cómo está escrito, no solo qué dice</h3>
+     <p class="lead" style="margin-top:10px;font-size:14.5px">Un paper publicado en AER pasó por tres rondas de referees. Cada decisión de organización es una decisión defensiva. Estas preguntas convierten la lectura en análisis:</p>
+     <ul class="tight" style="margin-top:12px;font-size:14px">
+      <li>¿Por qué la <b>sección de contexto</b> va antes que los datos? Casi siempre porque sin ella el lector no cree que la variación sea exógena.</li>
+      <li>¿Por qué esta figura está en el <b>cuerpo</b> y no en el apéndice? Porque es la que convence.</li>
+      <li>¿Qué crítica responde la <b>sección 5</b>? Nómbrala.</li>
+      <li>¿Qué resultado aparece <b>primero</b>? El orden revela qué considera el autor su aporte.</li>
+      <li>¿Hay algo prometido en la introducción que <b>nunca aparece</b> en el cuerpo?</li>
+     </ul>
+    </div>
+    <div class="card">
+     <h3>Errores típicos</h3>
+     <ul class="tight" style="margin-top:12px;font-size:14px">
+      <li><b>Resaltar en vez de escribir.</b> Un PDF amarillo no es comprensión. Escribe con tus palabras o no lo entendiste.</li>
+      <li><b>Leer de corrido.</b> Llegas a la página 12 sin saber cuál era la pregunta.</li>
+      <li><b>Saltarse el contexto institucional.</b> Es donde vive la exogeneidad.</li>
+      <li><b>Confundir significancia con importancia.</b> Un efecto puede ser significativo y económicamente irrelevante.</li>
+      <li><b>Aceptar el mecanismo porque suena razonable.</b> Distingue lo que el paper <em>muestra</em> de lo que <em>especula</em>.</li>
+      <li><b>Leer solo.</b> El paper se entiende explicándoselo a alguien.</li>
+     </ul>
+    </div>
+   </div>
+   <div class="warn" style="margin-top:var(--s3)"><b>Regla del semillero.</b> Si en la presentación alguien pregunta "¿por qué te creo ese efecto?" y la respuesta empieza con "porque la regresión da significativa", el equipo no terminó la pasada 2.</div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Producto</div>
+   <hr class="rule">
+   <h2>Estructura de la infografía</h2>
+   <p class="lead" style="margin:10px 0 var(--s3)">Una página. Cada bloque debe leerse en menos de 20 segundos y estar escrito con palabras del equipo.</p>
+   <div class="tbl-scroll">
+    <table><thead><tr><th class="plain" style="width:180px">Bloque</th><th class="plain">Qué contiene</th><th class="plain" style="width:32%">Prueba de que está bien</th></tr></thead>
+    <tbody id="infoOut"></tbody></table>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Actividad · 30 de septiembre</div>
+   <hr class="rule">
+   <h2>Referee Duel</h2>
+   <p class="lead" style="margin:10px 0 var(--s4)">Cada equipo presenta 8 minutos y enfrenta a otro equipo que llegó preparado a atacarlo. Los roles se sortean el 14 de septiembre.</p>
+   <div class="grid g4">
+    <div class="card"><div class="eyebrow">Rol A · 8 min</div><h3>Autores</h3><p class="small" style="margin-top:8px;color:var(--gris-o)">Defender el paper sin diapositivas: pregunta, contrafactual, identificación, resultado, mecanismo.</p></div>
+    <div class="card"><div class="eyebrow">Rol B · 6 min</div><h3>Referees</h3><p class="small" style="margin-top:8px;color:var(--gris-o)">Tres cargos obligatorios: una amenaza al supuesto, una historia alternativa sin efecto causal, y una falsación que el autor no hizo.</p></div>
+    <div class="card"><div class="eyebrow">Rol C · 2 min</div><h3>Editor</h3><p class="small" style="margin-top:8px;color:var(--gris-o)">Aceptar, revisar o rechazar, con una sola razón metodológica.</p></div>
+    <div class="card"><div class="eyebrow">Cierre · 3 min</div><h3>Esto en Colombia</h3><p class="small" style="margin-top:8px;color:var(--gris-o)">Cómo replicarlo con GEIH, SISBEN, Saber 11, Medicina Legal o Datos Abiertos: qué variación y qué dato falta.</p></div>
+   </div>
+
+   <h3 style="margin-top:var(--s5)">Las siete preguntas · rúbrica de la presentación</h3>
+   <div class="tbl-scroll" style="margin-top:var(--s3)">
+    <table><thead><tr><th class="plain" style="width:48px">#</th><th class="plain">Pregunta</th><th class="plain" style="width:38%">Qué evalúa</th></tr></thead>
+    <tbody id="p7Out"></tbody></table>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ================= CRONOGRAMA ================= -->
+<section id="cronograma" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Septiembre 2026</div>
+   <h1>Cronograma</h1>
+  </div>
+  <div class="block" id="cronoOut"></div>
+ </div>
+</section>
+
+<!-- ================= HORARIOS ================= -->
+<section id="horarios" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Disponibilidad declarada en la encuesta</div>
+   <h1>Horarios</h1>
+   <p class="lead" style="margin-top:12px">Franjas que cada integrante marcó como posibles. Nueve respuestas. Cinco pidieron reuniones mixtas, dos virtuales y uno presencial.</p>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Restricción del profesor</div>
+   <hr class="rule">
+   <div class="card flat">
+    <h3>El miércoles por la mañana no está disponible</h3>
+    <p class="lead" style="margin-top:10px;font-size:14.5px">Era la única franja con concentración alta del semillero: <b>miércoles 9–11 a.m. reunía a 5 de 9</b>. Sin ella, ninguna franja de la semana pasa de <b>3 personas</b>, y reunir a los nueve a la vez deja de ser posible en una sola sesión — o incluso en tres.</p>
+    <p class="lead" style="margin-top:10px;font-size:14.5px">La consecuencia práctica: el semillero deja de organizarse alrededor de una sesión plenaria semanal y pasa a <b>tutorías por equipo</b>. Es un cambio afortunado: las cuatro franjas de equipo <b>no dependían del miércoles</b> y siguen intactas.</p>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Tutorías por equipo · franja donde coinciden todos sus miembros</div>
+   <hr class="rule">
+   <div class="grid g4" id="eqHoras"></div>
+   <div class="card" style="margin-top:var(--s3)">
+    <div class="eyebrow">Propuesta de calendario semanal</div>
+    <h3>El jueves es el día del semillero</h3>
+    <p class="lead" style="margin-top:10px;font-size:14.5px">Tres de los cuatro equipos pueden atenderse el mismo jueves, en bloques seguidos, y solo E2 queda aparte:</p>
+    <ul class="tight" style="margin-top:12px;font-size:14px">
+     <li><b>Jueves 7–9 a.m.</b> — E4 · Luisa y Nicolle</li>
+     <li><b>Jueves 9–11 a.m.</b> — E3 · Valentina Chimachaná y Marian</li>
+     <li><b>Jueves 2–4 p.m.</b> — E1 · Bryan, Ana Sofía y Valentina Figueroa</li>
+     <li><b>Lunes 6–8 p.m.</b> — E2 · Alan y José Daniel <span class="small">(única franja común de los dos)</span></li>
+    </ul>
+    <p class="small" style="margin-top:12px">Ninguna de estas franjas tiene alternativa salvo E4 (martes 7–9 a.m.) y E3 (jueves 11 a.m.–1 p.m.). Si un equipo cambia de horario, deja de coincidir.</p>
+   </div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Sesión plenaria · Referee Duel</div>
+   <hr class="rule">
+   <div class="grid g3">
+    <div class="card">
+     <div class="eyebrow">Lo mejor posible con 1 franja</div>
+     <h3>3 de 9</h3>
+     <p class="lead" style="margin-top:10px;font-size:14.5px">Martes 2–4 p.m., jueves 2–4 p.m., jueves 9–11 a.m., martes 7–9 a.m. y viernes 6–8 p.m. empatan en el tope. Ninguna sirve como plenaria.</p>
+    </div>
+    <div class="card">
+     <div class="eyebrow">Con 2 franjas</div>
+     <h3>6 de 9</h3>
+     <p class="lead" style="margin-top:10px;font-size:14.5px">Martes 7–9 a.m. + martes 2–4 p.m. Faltarían José Daniel, Marian y Valentina Figueroa.</p>
+    </div>
+    <div class="card">
+     <div class="eyebrow">Cobertura total</div>
+     <h3>4 franjas</h3>
+     <p class="lead" style="margin-top:10px;font-size:14.5px">No existe ningún trío que cubra a los nueve. Hacen falta cuatro, por ejemplo lunes 9–11 + martes 7–9 + martes 2–4 + jueves 9–11.</p>
+    </div>
+   </div>
+   <div class="warn" style="margin-top:var(--s3)"><b>Decisión pendiente.</b> Para el Referee Duel hace falta una única fecha con todo el semillero, y la encuesta no la contiene. Conviene fijarla como compromiso académico —jueves 1 de octubre, 2–4 p.m. es el punto de partida con más gente disponible— y pedir excepción a quienes no marcaron esa franja, en vez de seguir buscando una coincidencia que no existe.</div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Mapa completo · número de integrantes disponibles</div>
+   <hr class="rule">
+   <div class="hgrid"><table id="mapaHoras"></table></div>
+   <p class="small" style="margin-top:var(--s3)">Pasa el cursor sobre una celda para ver quiénes están disponibles.</p>
+  </div>
+ </div>
+</section>
+
+<!-- ================= AVANCES ================= -->
+<section id="avances" hidden>
+ <div class="wrap">
+  <div class="pagehead">
+   <div class="eyebrow">Seguimiento</div>
+   <h1>Avances</h1>
+   <p class="lead" style="margin-top:12px">El equipo edita su tarjeta y envía el reporte. Cada envío queda guardado en la hoja de cálculo del semillero y notificado por correo.</p>
+  </div>
+
+  <div class="block">
+   <div class="card flat" style="display:flex;gap:var(--s4);flex-wrap:wrap;align-items:center;justify-content:space-between">
+    <div>
+     <div class="eyebrow" style="margin-bottom:4px">Estado de la conexión</div>
+     <div id="endpointState" class="sync">Comprobando…</div>
+    </div>
+    <div class="chips">
+     <button class="btn sec" id="btnExport" type="button">Exportar .json</button>
+     <button class="btn sec" id="btnImport" type="button">Importar</button>
+     <input type="file" id="fileImport" accept="application/json" hidden>
+     <button class="btn sec" id="btnReset" type="button">Borrar borrador local</button>
+    </div>
+   </div>
+  </div>
+
+  <div id="avOut" class="block"></div>
+
+  <div class="block">
+   <div class="eyebrow">Resumen</div>
+   <hr class="rule">
+   <div class="tbl-scroll"><table>
+    <thead><tr>
+     <th class="plain">Equipo</th><th class="plain">Paper</th><th class="plain">Lectura</th>
+     <th class="plain">Infografía</th><th class="plain">Responsable</th><th class="plain">Actualizado</th><th class="plain" style="width:150px">Avance</th>
+    </tr></thead><tbody id="resOut"></tbody>
+   </table></div>
+  </div>
+
+  <div class="block">
+   <div class="eyebrow">Configuración · solo para el profesor</div>
+   <hr class="rule">
+   <h2>Dónde se guardan los reportes</h2>
+   <p class="lead" style="margin:10px 0 var(--s3)">Los envíos van a una hoja de Google del semillero mediante un Apps Script, que además envía un correo en cada reporte nuevo. Todo queda en la cuenta de Icesi: sin servidor, sin terceros y sin costo.</p>
+   <ol class="tight" style="font-size:14px">
+    <li>Crear una hoja de cálculo nueva en Google Drive.</li>
+    <li>Abrir <b>Extensiones → Apps Script</b> y pegar el contenido de <code>avances-backend.gs</code>.</li>
+    <li>Cambiar la constante <code>CORREO</code> por <code>efmartinez@icesi.edu.co</code>.</li>
+    <li><b>Implementar → Nueva implementación → Aplicación web</b>. Ejecutar como: yo. Acceso: cualquier usuario.</li>
+    <li>Copiar la URL <code>/exec</code> y pegarla abajo en <code>ENDPOINT</code> dentro de este archivo HTML.</li>
+   </ol>
+   <p class="small" style="margin-top:var(--s3)">Mientras <code>ENDPOINT</code> esté vacío, la app sigue funcionando: guarda el borrador en el navegador del equipo y permite exportarlo en <code>.json</code>, pero no envía nada ni notifica.</p>
+  </div>
+ </div>
+</section>
+
+</main>
+<footer class="site"><div class="wrap"><div class="foot">
+ <div class="brand">
+  <div class="b-cienfi" style="font-size:16px">CIENFI<small>Centro de Investigación en Economía y Finanzas</small></div>
+  <div class="b-div" style="height:22px"></div>
+  <div class="b-icesi" style="font-size:11px">Universidad Icesi</div>
+ </div>
+ <div class="small">Semillero de investigación · Taller de papers · Septiembre 2026</div>
+</div></div></footer>
+<script>
+const PAPERS = [
+// ===== L1 CRIMEN =====
+{id:"p1",linea:"crimen",titulo:"Trafficking Networks and the Mexican Drug War",autores:"Melissa Dell",journal:"American Economic Review",anio:2015,pregunta:"¿Qué efecto tiene la política de interdicción al narcotráfico sobre la violencia y sobre la reorganización espacial de las rutas de tráfico?",outcome:"Homicidios relacionados con drogas; rutas de tráfico de cocaína",metodo:"RD",metodoLargo:"Regression Discontinuity en elecciones municipales cerradas ganadas por el PAN + modelo de red de rutas óptimas",hallazgo:"Los municipios donde el PAN gana por poco margen experimentan un aumento fuerte de la violencia tras el operativo; el tráfico se desvía hacia municipios vecinos, difundiendo violencia por la red.",doi:"10.1257/aer.20121637"},
+{id:"p2",linea:"crimen",titulo:"Rural Windfall or a New Resource Curse? Coca, Income, and Civil Conflict in Colombia",autores:"Joshua D. Angrist, Adriana D. Kugler",journal:"Review of Economics and Statistics",anio:2008,pregunta:"¿El auge de los ingresos por coca mejora el bienestar rural o alimenta el conflicto armado?",outcome:"Ingresos rurales, salarios, escolaridad infantil, violencia",metodo:"DiD",metodoLargo:"DiD / panel departamental explotando el auge de precios y cultivos de coca tras el colapso de la oferta en Perú y Bolivia",hallazgo:"El auge de la coca generó ganancias económicas modestas y desigualmente repartidas, pero incrementó de forma marcada la violencia en las zonas cultivadoras.",doi:"10.1162/rest.90.2.191"},
+{id:"p3",linea:"crimen",titulo:"Making a NARCO: Childhood Exposure to Illegal Labor Markets and Criminal Life Paths",autores:"María Micaela Sviatschi",journal:"Econometrica",anio:2022,pregunta:"¿La exposición durante la niñez a mercados laborales ilegales (coca) determina trayectorias criminales de largo plazo?",outcome:"Encarcelamiento por delitos de droga, escolaridad, ingresos en la adultez",metodo:"DiD",metodoLargo:"DiD con variación en el timing de shocks de precio de la coca interactuada con la edad de exposición del niño (event study por cohorte)",hallazgo:"Los niños expuestos al auge de la coca acumulan más capital humano criminal: mayor probabilidad de prisión por narcotráfico en la adultez, aun cuando los ingresos suben en el corto plazo.",doi:"10.3982/ECTA17082"},
+{id:"p4",linea:"crimen",titulo:"The Use of Violence in Illegal Markets: Evidence from Mahogany Trade in the Brazilian Amazon",autores:"Ariaster B. Chimeli, Rodrigo R. Soares",journal:"American Economic Journal: Applied Economics",anio:2017,pregunta:"¿La prohibición de un mercado causa violencia por sí misma, más allá de las características del bien o del territorio?",outcome:"Tasa de homicidios municipal",metodo:"DiD",metodoLargo:"DiD comparando municipios productores vs. no productores de caoba antes y después de la prohibición del comercio (1999-2001)",hallazgo:"La prohibición de la caoba aumentó los homicidios en los municipios productores en cerca de un 20%: la ilegalidad, y no el bien, genera la violencia.",doi:"10.1257/app.20160055"},
+{id:"p5",linea:"crimen",titulo:"Do Police Reduce Crime? Estimates Using the Allocation of Police Forces After a Terrorist Attack",autores:"Rafael Di Tella, Ernesto Schargrodsky",journal:"American Economic Review",anio:2004,pregunta:"¿Más policía en la calle reduce el crimen? (resolviendo la endogeneidad clásica policía-crimen)",outcome:"Robos de autos por cuadra en Buenos Aires",metodo:"Experimento natural",metodoLargo:"Experimento natural: tras el atentado a la AMIA se asignó policía a todas las instituciones judías; DiD por cuadra según distancia a la institución protegida",hallazgo:"El efecto es grande pero extremadamente local: los robos caen fuerte solo en la cuadra vigilada, sin desplazamiento significativo a cuadras vecinas.",doi:"10.1257/000282804322970733"},
+{id:"p6",linea:"crimen",titulo:"Panic on the Streets of London: Police, Crime, and the July 2005 Terror Attacks",autores:"Mirko Draca, Stephen Machin, Robert Witt",journal:"American Economic Review",anio:2011,pregunta:"¿Cuál es la elasticidad del crimen frente al despliegue policial?",outcome:"Crímenes por distrito (susceptibles y no susceptibles a vigilancia)",metodo:"DiD",metodoLargo:"DiD explotando el redespliegue masivo y transitorio de policía en el centro de Londres tras los atentados de julio de 2005",hallazgo:"El aumento del 30% en horas policiales redujo el crimen alrededor de un 11%: elasticidad crimen-policía cercana a -0.3, con reversión al retirarse el operativo.",doi:"10.1257/aer.101.5.2157"},
+{id:"p7",linea:"crimen",titulo:"Spillovers from Conditional Cash Transfer Programs: Bolsa Família and Crime in Urban Brazil",autores:"Laura Chioda, João M. P. De Mello, Rodrigo R. Soares",journal:"Economics of Education Review",anio:2016,pregunta:"¿Las transferencias condicionadas reducen el crimen en el entorno de los colegios beneficiarios?",outcome:"Crímenes registrados en el área de influencia de cada colegio",metodo:"DiD",metodoLargo:"DiD con panel de colegios de São Paulo y variación en la expansión de la cobertura de Bolsa Família alrededor de cada colegio",hallazgo:"La expansión de Bolsa Família redujo los delitos en el entorno escolar cerca de un 6%, sin evidencia de desplazamiento del crimen a zonas cercanas.",doi:"10.1016/j.econedurev.2015.04.005"},
+{id:"p8",linea:"crimen",titulo:"Civil Conflict and Forced Migration: The Micro Determinants and Welfare Losses of Displacement in Colombia",autores:"Ana María Ibáñez, Carlos Eduardo Vélez",journal:"World Development",anio:2008,pregunta:"¿Qué determina la decisión de desplazarse forzadamente y cuál es el costo en bienestar del desplazamiento?",outcome:"Consumo, activos y bienestar de hogares desplazados",metodo:"Panel / control por selección",metodoLargo:"Modelo de decisión de migración con datos de hogares desplazados vs. no desplazados en municipios expulsores; corrección por selección",hallazgo:"El desplazamiento responde a amenazas directas y ataques, y genera pérdidas de bienestar equivalentes a alrededor del 37% del consumo previo del hogar.",doi:"10.1016/j.worlddev.2007.04.013"},
+{id:"p9",linea:"crimen",titulo:"The Impact of Internal Displacement on Destination Communities: Evidence from the Colombian Conflict",autores:"Juan S. Morales",journal:"Journal of Development Economics",anio:2018,pregunta:"¿Cómo afecta la llegada masiva de desplazados al mercado laboral de las ciudades receptoras?",outcome:"Salarios y empleo (formal e informal) de trabajadores nativos",metodo:"IV",metodoLargo:"Variables instrumentales tipo shift-share: flujos de desplazados predichos por violencia en municipios de origen y redes históricas de migración",hallazgo:"La llegada de desplazados reduce los salarios de los trabajadores informales de baja calificación, con efectos pequeños o nulos sobre el empleo formal.",doi:"10.1016/j.jdeveco.2017.10.003"},
+
+// ===== L2 EDUCACION =====
+{id:"p10",linea:"educacion",titulo:"Vouchers for Private Schooling in Colombia: Evidence from a Randomized Natural Experiment",autores:"Joshua Angrist, Eric Bettinger, Erik Bloom, Elizabeth King, Michael Kremer",journal:"American Economic Review",anio:2002,pregunta:"¿Los vouchers para colegios privados mejoran los resultados educativos de estudiantes de bajos ingresos?",outcome:"Repitencia, escolaridad completada, pruebas estandarizadas",metodo:"RCT / lotería",metodoLargo:"Experimento natural aleatorizado: el programa PACES de Colombia asignó vouchers por lotería entre postulantes",hallazgo:"Los ganadores de la lotería completaron 0.1 años más de escolaridad, repitieron menos y obtuvieron mejores puntajes en pruebas.",doi:"10.1257/000282802762024629"},
+{id:"p11",linea:"educacion",titulo:"Long-Term Educational Consequences of Secondary School Vouchers: Evidence from Administrative Records in Colombia",autores:"Joshua Angrist, Eric Bettinger, Michael Kremer",journal:"American Economic Review",anio:2006,pregunta:"¿Los efectos del voucher persisten hasta la graduación y el examen de admisión universitaria?",outcome:"Presentación y puntaje en el ICFES (Saber 11)",metodo:"RCT / lotería (seguimiento)",metodoLargo:"Seguimiento de largo plazo de la lotería PACES con registros administrativos del ICFES; corrección por selección en la decisión de presentar el examen",hallazgo:"Los ganadores tienen entre 5 y 7 puntos porcentuales más de probabilidad de graduarse y presentar el ICFES, con mejores puntajes.",doi:"10.1257/aer.96.3.847"},
+{id:"p12",linea:"educacion",titulo:"Upstream and Downstream Impacts of College Merit-Based Financial Aid for Low-Income Students: Ser Pilo Paga in Colombia",autores:"Juliana Londoño-Vélez, Catherine Rodríguez, Fabio Sánchez",journal:"American Economic Journal: Economic Policy",anio:2020,pregunta:"¿Una beca de mérito para estudiantes de bajos ingresos aumenta el acceso a universidades de alta calidad y mejora el esfuerzo previo?",outcome:"Matrícula inmediata en universidades acreditadas; esfuerzo y puntaje en Saber 11",metodo:"RD",metodoLargo:"Regression Discontinuity en el doble umbral de elegibilidad de Ser Pilo Paga (puntaje Saber 11 y puntaje SISBEN)",hallazgo:"La beca aumentó en 32 puntos porcentuales la matrícula inmediata en universidades de alta calidad y elevó el esfuerzo de los estudiantes antes del examen.",doi:"10.1257/pol.20180131"},
+{id:"p13",linea:"educacion",titulo:"Improving the Design of Conditional Transfer Programs: Evidence from a Randomized Education Experiment in Colombia",autores:"Felipe Barrera-Osorio, Marianne Bertrand, Leigh L. Linden, Francisco Perez-Calle",journal:"American Economic Journal: Applied Economics",anio:2011,pregunta:"¿Cómo cambia el impacto de una transferencia condicionada según el diseño del pago (mensual, ahorro forzoso o incentivo a graduarse)?",outcome:"Asistencia escolar, matrícula al año siguiente, ingreso a educación superior",metodo:"RCT",metodoLargo:"Experimento aleatorizado en Bogotá con tres brazos de tratamiento que varían el momento y la condición del pago",hallazgo:"Todos los diseños elevan la asistencia por igual, pero aplazar parte del pago hasta la matrícula aumenta significativamente la continuidad y el tránsito a educación superior.",doi:"10.1257/app.3.2.167"},
+{id:"p14",linea:"educacion",titulo:"Going to a Better School: Effects and Behavioral Responses",autores:"Cristian Pop-Eleches, Miguel Urquiola",journal:"American Economic Review",anio:2013,pregunta:"¿Entrar a un colegio 'mejor' mejora el desempeño del estudiante, y cómo responden padres y profesores?",outcome:"Puntajes en el examen de graduación; esfuerzo de padres y percepción del estudiante",metodo:"RD",metodoLargo:"Regression Discontinuity en los umbrales de admisión de colegios rumanos con asignación por puntaje",hallazgo:"Entrar a un colegio de mejor calidad eleva modestamente los puntajes, pero los padres reducen su esfuerzo y los estudiantes se perciben peor frente a sus pares.",doi:"10.1257/aer.103.4.1289"},
+{id:"p15",linea:"educacion",titulo:"Schooling and Labor Market Consequences of School Construction in Indonesia",autores:"Esther Duflo",journal:"American Economic Review",anio:2001,pregunta:"¿Cuál es el retorno causal de la educación cuando la oferta escolar se expande exógenamente?",outcome:"Años de escolaridad y salarios en la adultez",metodo:"DiD",metodoLargo:"DiD con doble diferencia: intensidad del programa de construcción de escuelas por distrito x cohorte expuesta por edad",hallazgo:"Cada escuela construida por cada 1.000 niños aumentó 0.12-0.19 años de escolaridad y 1.5-2.7% los salarios: retornos a la educación del orden de 6-10%.",doi:"10.1257/aer.91.4.795"},
+{id:"p16",linea:"educacion",titulo:"Measuring the Impacts of Teachers II: Teacher Value-Added and Student Outcomes in Adulthood",autores:"Raj Chetty, John N. Friedman, Jonah E. Rockoff",journal:"American Economic Review",anio:2014,pregunta:"¿Tener un buen profesor tiene efectos de largo plazo sobre la vida adulta del estudiante?",outcome:"Ingresos en la adultez, asistencia a la universidad, embarazo adolescente",metodo:"Event study / cuasi-experimento",metodoLargo:"Event study cuasi-experimental basado en la rotación de profesores entre colegios, con datos administrativos de 1 millón de estudiantes",hallazgo:"Un profesor una desviación estándar mejor aumenta cerca de 1.3% los ingresos a los 28 años y la probabilidad de ir a la universidad.",doi:"10.1257/aer.104.9.2633"},
+{id:"p17",linea:"educacion",titulo:"Teacher Performance Pay: Experimental Evidence from India",autores:"Karthik Muralidharan, Venkatesh Sundararaman",journal:"Journal of Political Economy",anio:2011,pregunta:"¿El pago por desempeño docente mejora el aprendizaje, y a qué costo relativo frente a dar más insumos?",outcome:"Puntajes en matemáticas y lenguaje",metodo:"RCT",metodoLargo:"Experimento aleatorizado en 500 escuelas de Andhra Pradesh con brazos de incentivo individual, grupal e insumos adicionales",hallazgo:"Los incentivos docentes elevaron los puntajes 0.27 s.d. en dos años y resultaron más costo-efectivos que aportar insumos adicionales.",doi:"10.1086/659655"},
+{id:"p18",linea:"educacion",titulo:"Peer Effects, Teacher Incentives, and the Impact of Tracking: Evidence from a Randomized Evaluation in Kenya",autores:"Esther Duflo, Pascaline Dupas, Michael Kremer",journal:"American Economic Review",anio:2011,pregunta:"¿Agrupar estudiantes por nivel (tracking) ayuda o perjudica a los más rezagados?",outcome:"Puntajes de aprendizaje de estudiantes de todo el rango de habilidad",metodo:"RCT",metodoLargo:"Experimento aleatorizado: 121 escuelas asignadas aleatoriamente a agrupar o no a los estudiantes por nivel inicial",hallazgo:"El tracking benefició a todos los estudiantes, incluidos los del tramo bajo, porque permitió a los docentes ajustar el nivel de enseñanza.",doi:"10.1257/aer.101.5.1739"},
+
+// ===== L3 INCLUSION FINANCIERA =====
+{id:"p19",linea:"finanzas",titulo:"On Her Own Account: How Strengthening Women's Financial Control Impacts Labor Supply and Gender Norms",autores:"Erica Field, Rohini Pande, Natalia Rigol, Simone Schaner, Charity Troyer Moore",journal:"American Economic Review",anio:2021,pregunta:"¿Dar a las mujeres control directo sobre sus propios ingresos cambia su oferta laboral y las normas de género?",outcome:"Participación laboral femenina, normas de género reportadas",metodo:"RCT",metodoLargo:"Experimento aleatorizado en India: pago del programa de empleo rural directamente a cuentas de las mujeres + capacitación en su uso",hallazgo:"El control directo de la cuenta aumentó de forma persistente el trabajo de las mujeres y relajó las normas que restringían su empleo.",doi:"10.1257/aer.20200705"},
+{id:"p20",linea:"finanzas",titulo:"Do Women Pay More for Credit? Evidence from Italy",autores:"Alberto Alesina, Francesca Lotti, Paolo Emilio Mistrulli",journal:"Journal of the European Economic Association",anio:2013,pregunta:"¿Las empresarias pagan tasas de interés más altas que los hombres con igual riesgo?",outcome:"Tasa de interés sobre líneas de crédito a microempresas",metodo:"Panel con controles y matching",metodoLargo:"Panel de registros de crédito italianos con controles exhaustivos de riesgo, banco, sector y territorio (identificación por comparación intra-banco)",hallazgo:"Las mujeres pagan sistemáticamente más por el crédito aun con el mismo riesgo observable, diferencia no explicada por su historial de repago.",doi:"10.1111/j.1542-4774.2012.01100.x"},
+{id:"p21",linea:"finanzas",titulo:"Tying Odysseus to the Mast: Evidence from a Commitment Savings Product in the Philippines",autores:"Nava Ashraf, Dean Karlan, Wesley Yin",journal:"Quarterly Journal of Economics",anio:2006,pregunta:"¿Los problemas de autocontrol explican el bajo ahorro, y un producto de compromiso puede corregirlos?",outcome:"Saldos de ahorro después de 12 meses",metodo:"RCT",metodoLargo:"Experimento aleatorizado con oferta de una cuenta de ahorro con restricciones de retiro, combinado con medición previa de preferencias hiperbólicas",hallazgo:"La cuenta de compromiso elevó el ahorro un 82% en un año, y el efecto se concentró en quienes mostraban sesgo por el presente.",doi:"10.1162/qjec.2006.121.2.635"},
+{id:"p22",linea:"finanzas",titulo:"Information Disclosure, Cognitive Biases, and Payday Borrowing",autores:"Marianne Bertrand, Adair Morse",journal:"Journal of Finance",anio:2011,pregunta:"¿Presentar mejor la información del costo del crédito reduce el endeudamiento sesgado?",outcome:"Probabilidad y monto de renovar un crédito de día de pago",metodo:"Experimento de campo",metodoLargo:"Experimento de campo en prestamistas payday: asignación aleatoria de folletos con el costo expresado en dólares acumulados vs. en TAE",hallazgo:"Mostrar el costo en dólares acumulados en el tiempo redujo el endeudamiento posterior alrededor de 11%, señalando sesgos cognitivos y no solo restricciones.",doi:"10.1111/j.1540-6261.2011.01698.x"},
+{id:"p23",linea:"finanzas",titulo:"Savings Constraints and Microenterprise Development: Evidence from a Field Experiment in Kenya",autores:"Pascaline Dupas, Jonathan Robinson",journal:"American Economic Journal: Applied Economics",anio:2013,pregunta:"¿Las restricciones de ahorro, y no de crédito, limitan la inversión de los microempresarios (especialmente mujeres)?",outcome:"Inversión productiva, gasto privado, consumo",metodo:"RCT",metodoLargo:"Experimento aleatorizado: acceso gratuito a cuentas de ahorro para vendedoras de mercado y conductores de bicitaxi en Kenia",hallazgo:"El acceso al ahorro elevó la inversión de las vendedoras entre 38% y 56%, pese a las comisiones y a las tasas reales negativas.",doi:"10.1257/app.5.1.163"},
+{id:"p24",linea:"finanzas",titulo:"The Miracle of Microfinance? Evidence from a Randomized Evaluation",autores:"Abhijit Banerjee, Esther Duflo, Rachel Glennerster, Cynthia Kinnan",journal:"American Economic Journal: Applied Economics",anio:2015,pregunta:"¿El acceso al microcrédito transforma el consumo, la creación de negocios y el bienestar de los hogares pobres?",outcome:"Creación de negocios, ganancias, consumo, educación y salud",metodo:"RCT",metodoLargo:"Experimento aleatorizado por barrios en Hyderabad: apertura escalonada y aleatoria de sucursales de microcrédito",hallazgo:"El microcrédito aumentó la inversión de los negocios ya existentes, pero no elevó el consumo promedio ni indicadores de desarrollo humano.",doi:"10.1257/app.20130533"},
+{id:"p25",linea:"finanzas",titulo:"Expanding Credit Access: Using Randomized Supply Decisions to Estimate the Impacts",autores:"Dean Karlan, Jonathan Zinman",journal:"Review of Financial Studies",anio:2009,pregunta:"¿Ampliar el crédito a solicitantes marginales mejora o deteriora su bienestar?",outcome:"Ingreso, empleo, consumo y salud subjetiva del solicitante",metodo:"RCT / experimento de encouragement",metodoLargo:"Aleatorización de la decisión de aprobación entre solicitantes marginalmente rechazados por un prestamista sudafricano",hallazgo:"Los solicitantes marginales aprobados mejoraron su probabilidad de mantener el empleo y su ingreso, sugiriendo retornos positivos incluso a tasas altas.",doi:"10.1093/rfs/hhp092"},
+{id:"p26",linea:"finanzas",titulo:"The Long-Run Poverty and Gender Impacts of Mobile Money",autores:"Tavneet Suri, William Jack",journal:"Science",anio:2016,pregunta:"¿El dinero móvil reduce la pobreza en el largo plazo y cambia las decisiones ocupacionales de las mujeres?",outcome:"Consumo per cápita, pobreza extrema, ocupación",metodo:"DiD",metodoLargo:"DiD con panel de hogares y variación espacial en la expansión de agentes M-PESA en Kenia entre 2008 y 2014",hallazgo:"El acceso a M-PESA sacó de la pobreza extrema a cerca del 2% de los hogares kenianos y desplazó a mujeres de la agricultura hacia negocios propios.",doi:"10.1126/science.aah5309"},
+{id:"p27",linea:"finanzas",titulo:"Microenterprise Growth and the Flypaper Effect: Evidence from a Randomized Experiment in Ghana",autores:"Marcel Fafchamps, David McKenzie, Simon Quinn, Christopher Woodruff",journal:"Journal of Development Economics",anio:2014,pregunta:"¿Importa la forma del capital (efectivo vs. en especie) para el crecimiento de las microempresas, y difiere por género?",outcome:"Ganancias e inversión de la microempresa",metodo:"RCT",metodoLargo:"Experimento aleatorizado con transferencias en efectivo vs. en especie a microempresarios en Ghana",hallazgo:"El capital en especie aumenta las ganancias de las mujeres con negocios pequeños, mientras el efectivo tiende a diluirse en otros gastos del hogar.",doi:"10.1016/j.jdeveco.2013.09.010"},
+
+// ===== L4 MERCADO LABORAL E INFORMALIDAD =====
+{id:"p28",linea:"laboral",titulo:"Firms, Informality, and Development: Theory and Evidence from Brazil",autores:"Gabriel Ulyssea",journal:"American Economic Review",anio:2018,pregunta:"¿Qué pasa con el empleo, el tamaño de las firmas y el bienestar cuando se reduce la informalidad?",outcome:"Informalidad de firmas y de trabajadores, tamaño de firma, bienestar",metodo:"Modelo estructural + cuasi-experimento",metodoLargo:"Modelo de equilibrio de firmas heterogéneas estimado con datos brasileños, validado con la reforma SIMPLES como cuasi-experimento",hallazgo:"Reducir la informalidad tiene efectos opuestos según el margen: bajar costos de entrada aumenta bienestar, mientras que solo endurecer la fiscalización lo reduce.",doi:"10.1257/aer.20141745"},
+{id:"p29",linea:"laboral",titulo:"Wages and Informality in Developing Countries",autores:"Costas Meghir, Renata Narita, Jean-Marc Robin",journal:"American Economic Review",anio:2015,pregunta:"¿La informalidad es un sector de refugio de baja productividad o parte de un mercado laboral competitivo con fricciones?",outcome:"Salarios, transiciones formal-informal, productividad de la firma",metodo:"Modelo de búsqueda estructural",metodoLargo:"Modelo de búsqueda y emparejamiento con firmas heterogéneas estimado con datos longitudinales brasileños",hallazgo:"Endurecer la fiscalización aumenta la formalidad y los salarios sin destruir empleo, porque las firmas informales son en promedio menos productivas.",doi:"10.1257/aer.20121110"},
+{id:"p30",linea:"laboral",titulo:"Effects of Colombia's Social Protection System on Workers' Choice between Formal and Informal Employment",autores:"Adriana Camacho, Emily Conover, Alejandro Hoyos",journal:"World Bank Economic Review",anio:2013,pregunta:"¿El régimen subsidiado de salud incentiva a los trabajadores colombianos a permanecer en la informalidad?",outcome:"Probabilidad de empleo formal",metodo:"DiD",metodoLargo:"DiD explotando la expansión escalonada del SISBEN y del régimen subsidiado entre municipios colombianos",hallazgo:"La expansión del régimen subsidiado redujo el empleo formal en cerca de 4 puntos porcentuales: la protección social no contributiva subsidia la informalidad.",doi:"10.1093/wber/lht028"},
+{id:"p31",linea:"laboral",titulo:"Wage-Shifting Effects of Severance Payments Savings Accounts in Colombia",autores:"Adriana D. Kugler",journal:"Journal of Public Economics",anio:2005,pregunta:"¿Quién paga realmente los costos de despido: la firma o el trabajador vía menores salarios?",outcome:"Salarios y empleo formal",metodo:"DiD",metodoLargo:"DiD sobre la reforma laboral colombiana de 1990, comparando trabajadores cubiertos y no cubiertos por las cuentas de cesantías",hallazgo:"Entre el 60% y el 80% del costo de las cesantías se trasladó a menores salarios: los trabajadores financian su propia protección.",doi:"10.1016/j.jpubeco.2004.04.006"},
+{id:"p32",linea:"laboral",titulo:"A Helping Hand or the Long Arm of the Law? Experimental Evidence on What Governments Can Do to Formalize Firms",autores:"Gustavo Henrique de Andrade, Miriam Bruhn, David McKenzie",journal:"World Bank Economic Review",anio:2014,pregunta:"¿Qué formaliza más a las microempresas: información, subsidio de costos o inspección?",outcome:"Registro formal de la firma",metodo:"RCT",metodoLargo:"Experimento aleatorizado en Minas Gerais con cuatro brazos: información, costos cubiertos, inspección y amenaza de inspección al vecino",hallazgo:"Solo la inspección efectiva aumentó la formalización; la información y los subsidios de costo no tuvieron ningún efecto.",doi:"10.1093/wber/lhu008"},
+{id:"p33",linea:"laboral",titulo:"Informal Labor and the Efficiency Cost of Social Programs: Evidence from Unemployment Insurance in Brazil",autores:"François Gerard, Gustavo Gonzaga",journal:"American Economic Journal: Economic Policy",anio:2021,pregunta:"¿El costo de eficiencia del seguro de desempleo es menor cuando existe un sector informal grande?",outcome:"Duración del desempleo formal y reempleo informal",metodo:"RD",metodoLargo:"Regression Discontinuity en los umbrales de elegibilidad y duración del seguro de desempleo brasileño",hallazgo:"El seguro alarga la permanencia fuera del empleo formal, pero buena parte de esa respuesta es trabajo informal, reduciendo el costo de eficiencia real.",doi:"10.1257/pol.20180072"},
+{id:"p34",linea:"laboral",titulo:"Vocational Training for Disadvantaged Youth in Colombia: A Long-Term Follow-Up",autores:"Orazio Attanasio, Arlen Guarín, Carlos Medina, Costas Meghir",journal:"American Economic Journal: Applied Economics",anio:2017,pregunta:"¿La formación para el trabajo mejora el empleo formal y los ingresos de jóvenes vulnerables en el largo plazo?",outcome:"Empleo formal, salarios y cotizaciones (registros administrativos, 10 años)",metodo:"RCT (seguimiento de largo plazo)",metodoLargo:"Seguimiento a 10 años del experimento aleatorizado Jóvenes en Acción usando registros administrativos de seguridad social",hallazgo:"El programa aumentó de forma persistente la probabilidad de empleo formal y los ingresos, especialmente para las mujeres.",doi:"10.1257/app.20150554"},
+{id:"p35",linea:"laboral",titulo:"Risky Business: The Market for Unprotected Commercial Sex",autores:"Paul Gertler, Manisha Shah, Stefano M. Bertozzi",journal:"Journal of Political Economy",anio:2005,pregunta:"¿Cómo se forman los precios en un mercado informal y estigmatizado, y qué compensa el riesgo?",outcome:"Precio de la transacción sexual",metodo:"Panel con efectos fijos",metodoLargo:"Panel de trabajadoras sexuales mexicanas con efectos fijos de trabajadora, explotando variación intra-persona entre transacciones",hallazgo:"Los clientes pagan una prima de 23-46% por sexo sin protección: el mercado informal fija precios que compensan el riesgo de salud.",doi:"10.1086/429700"}
+];
+
+/* ===================================================================
+   CONFIGURACIÓN — pegar aquí la URL /exec del Apps Script (ver Avances)
+   =================================================================== */
+const ENDPOINT = "";
+
+/* ================= DATOS ================= */
+const LINEAS = {
+ crimen:{n:"Crimen, violencia y economía ilícita",abbr:"B",
+   desc:"Narcotráfico, violencia, desplazamiento y sus efectos sobre el mercado laboral."},
+ educacion:{n:"Educación y capital humano",abbr:"C",
+   desc:"Qué explica que un colegio o un territorio logre resultados por encima de lo esperado."},
+ finanzas:{n:"Inclusión financiera y comportamiento",abbr:"E",
+   desc:"Brechas de género en financiación y sesgos cognitivos en ahorro y endeudamiento."},
+ laboral:{n:"Mercado laboral e informalidad",abbr:"A",
+   desc:"Mercados informales poco estudiados y el efecto real de la regulación."}
+};
+
+const INTEGRANTES = [
+ {n:"Valentina Chimachaná Cabrera",prog:"Economía y NI",sem:6,tema:"Brechas de género en acceso a crédito y ahorro; financiación de pequeñas empresas de Cali",linea:"finanzas"},
+ {n:"Alan Riascos",prog:"Finanzas",sem:3,tema:"Colegios públicos vulnerables que superan a los privados en Saber 11",linea:"educacion"},
+ {n:"José Daniel Iturri Salazar",prog:"Finanzas",sem:2,tema:"Educación superior de alta calidad y movilidad social en el Pacífico",linea:"educacion"},
+ {n:"Bryan Steven Ortega Marín",prog:"Economía y NI · Mercadeo",sem:3,tema:"Narcotráfico: ¿desarrollo económico o trampa de violencia?",linea:"crimen"},
+ {n:"Ana Sofía Núñez Velásquez",prog:"Economía y NI · Mercadeo",sem:3,tema:"Desplazamiento forzado como mecanismo entre narcotráfico y mercado laboral",linea:"crimen"},
+ {n:"Nicolle Valeria Arce Castro",prog:"Economía y NI",sem:8,tema:"Sin tema registrado · Econometría I, Business Analytics",linea:"laboral"},
+ {n:"Luisa Fernanda Fernández",prog:"Economía y NI",sem:5,tema:"Mercados informales poco estudiados; hasta dónde sirve la regulación",linea:"laboral"},
+ {n:"Marian Alexa Mera Ocampo",prog:"Economía y NI",sem:6,tema:"Sesgos cognitivos en decisiones de ahorro, endeudamiento y crédito",linea:"finanzas"},
+ {n:"Valentina Figueroa Andrade",prog:"Ciencia Política · Economía y NI",sem:9,tema:"Sin tema registrado · Econometría I, semillero previo",linea:"crimen"}
+];
+
+const EQUIPOS = [
+ {id:"E1",nombre:"Narcotráfico, violencia y desplazamiento",linea:"crimen",
+  miembros:["Bryan Steven Ortega Marín","Ana Sofía Núñez Velásquez","Valentina Figueroa Andrade"],
+  comun:"Los tres eligieron crimen como primera opción. Bryan pregunta si el narcotráfico genera desarrollo o violencia; Ana Sofía propone el desplazamiento como el mecanismo hacia el mercado laboral. Valentina F. aporta el perfil econométrico.",
+  hora:"Jueves 2–4 p.m.", candidatos:["p1","p2","p3","p4","p9","p8","p5","p6"]},
+ {id:"E2",nombre:"Calidad escolar y retornos a la educación",linea:"educacion",
+  miembros:["Alan Riascos","José Daniel Iturri Salazar"],
+  comun:"Misma pregunta desde extremos opuestos del sistema: colegios públicos que superan a los privados, y educación superior de calidad en el Pacífico. Ambos en semestres tempranos: conviene un diseño visualmente claro (lotería o RD).",
+  hora:"Lunes 6–8 p.m.", candidatos:["p10","p11","p12","p13","p14","p15","p16","p17","p18"]},
+ {id:"E3",nombre:"Género, sesgos y decisiones financieras",linea:"finanzas",
+  miembros:["Valentina Chimachaná Cabrera","Marian Alexa Mera Ocampo"],
+  comun:"Acceso al crédito con brecha de género y comportamiento en ahorro y deuda: es la misma literatura de restricciones y sesgos en finanzas de los hogares.",
+  hora:"Jueves 9–11 a.m. (alt.: 11 a.m.–1 p.m.)", candidatos:["p19","p20","p21","p22","p23","p24","p26","p27","p25"]},
+ {id:"E4",nombre:"Informalidad, regulación y mercados poco estudiados",linea:"laboral",
+  miembros:["Luisa Fernanda Fernández","Nicolle Valeria Arce Castro"],
+  comun:"Luisa aporta la pregunta sobre mercados informales y regulación; Nicolle, el perfil cuantitativo más fuerte del semillero, lo que habilita papers con modelo estructural o RD.",
+  hora:"Jueves 7–9 a.m. (alt.: martes 7–9 a.m.)", candidatos:["p28","p29","p30","p31","p32","p33","p34","p35"]}
+];
+
+const CRONO = [
+ {s:"Semana 1",f:"31 ago – 4 sep",t:"Equipos y elección del paper",
+  ses:"E2 lun 31 ago 6–8 p.m. · E4 jue 3 sep 7–9 a.m. · E3 jue 3 sep 9–11 a.m. · E1 jue 3 sep 2–4 p.m.",
+  it:["<b>En la tutoría:</b> línea, equipo y taller de 20 min sobre cómo leer la sección de identificación.",
+      "<b>Después:</b> cada equipo preselecciona tres papers de su línea.",
+      "<b>Vie 4:</b> paper registrado en Avances y pasada 1 completa."],
+  e:"Paper elegido + las tres frases de la pasada 1."},
+ {s:"Semana 2",f:"7 – 11 sep",t:"Datos, metodología e identificación",
+  ses:"E2 lun 7 sep 6–8 p.m. · E4 jue 10 sep 7–9 a.m. · E3 jue 10 sep 9–11 a.m. · E1 jue 10 sep 2–4 p.m.",
+  it:["<b>Antes de la tutoría:</b> pasada 2 y ficha de identificación escrita.",
+      "<b>En la tutoría:</b> el equipo explica en 5 min <em>solo</em> la variación que usa, con un dibujo. Sin resultados.",
+      "<b>Después:</b> pasada 3: tabla principal, magnitud traducida y robustez."],
+  e:"Ficha de identificación de una página + coeficiente interpretado."},
+ {s:"Semana 3",f:"14 – 18 sep",t:"Resultados e infografía",
+  ses:"E2 lun 14 sep 6–8 p.m. · E4 jue 17 sep 7–9 a.m. · E3 jue 17 sep 9–11 a.m. · E1 jue 17 sep 2–4 p.m.",
+  it:["<b>Lun 14:</b> sorteo de roles del Referee Duel; cada equipo recibe el paper que deberá atacar.",
+      "<b>Mar 15:</b> borrador con los once bloques obligatorios.",
+      "<b>En la tutoría:</b> revisión del borrador — qué bloque no se entiende en 20 segundos.",
+      "<b>Jue 18–Vie 19:</b> diseño final."],
+  e:"Infografía casi final registrada en Avances."},
+ {s:"Semana 4",f:"21 sep – 1 oct",t:"Presentaciones y Referee Duel",
+  ses:"Plenaria única · fecha por confirmar con el grupo",
+  it:["<b>Lun 21–Vie 25:</b> ensayo sin diapositivas y respuestas escritas a las siete preguntas.",
+      "<b>Vie 25:</b> los referees entregan sus tres cargos por escrito.",
+      "<b>Plenaria (2 h):</b> Referee Duel y cierre 'Esto en Colombia'.",
+      "<b>Nota:</b> ninguna franja de la encuesta reúne a los nueve. La fecha se fija pidiendo excepción al grupo — ver la pestaña Horarios."],
+  e:"Infografía final + presentación + avance al 100%."}
+];
+
+
+const INFOGRAFIA = [
+ ["Pregunta","Una sola frase interrogativa, con sujeto y efecto explícitos.","Se entiende sin leer nada más."],
+ ["Motivación","Por qué importa: un dato, una cifra o una tensión de política.","Dos líneas y al menos un número."],
+ ["Datos","Fuente, unidad de observación, período y tamaño de muestra.","Se puede decir 'son N municipios entre X e Y'."],
+ ["Tratamiento","Qué le pasó al grupo tratado y cuándo.","Es un evento con fecha, no una característica."],
+ ["Comparación","Quiénes forman el contrafactual y por qué se parecen.","Dice en qué se parecían <em>antes</em>."],
+ ["Identificación","El método y el supuesto que lo sostiene.","Incluye un dibujo de la variación."],
+ ["Outcome","La variable de resultado con sus unidades.","Aparece la unidad: p.p., log-salarios, homicidios por 100.000."],
+ ["Resultado","El coeficiente central, traducido a magnitud interpretable.","Contiene la frase 'esto equivale a…'."],
+ ["Mecanismo","El canal económico y la evidencia que lo respalda.","Distingue lo que muestra de lo que especula."],
+ ["Conclusión","Qué aprendimos y para qué política sirve.","No repite el resultado: dice qué implica."],
+ ["Extensión","Qué harían distinto o cómo lo replicarían en Colombia.","Nombra una fuente colombiana y una variación explotable."]
+];
+
+const P7 = [
+ ["¿Cuál es la pregunta y por qué no la responde una correlación?","El problema de identificación, no el tema."],
+ ["¿Cuál es el contrafactual?","El corazón de la inferencia causal."],
+ ["¿Qué supuesto hay que creer y cómo lo defiende el autor?","Tendencias paralelas, continuidad, exclusión."],
+ ["Cuenta una historia alternativa sin efecto causal.","Pensar en contra del paper."],
+ ["¿Cuánto es el efecto para alguien fuera de economía?","Significancia frente a importancia."],
+ ["¿A quién se extrapola y a quién no?","Validez externa y qué estima realmente (LATE)."],
+ ["¿Cómo lo replicarías en Colombia?","Convertir el paper en un proyecto posible."]
+];
+
+const DIAS=["Lunes","Martes","Miércoles","Jueves","Viernes"];
+const FRANJAS=["7–9 a.m.","9–11 a.m.","11 a.m.–1 p.m.","2–4 p.m.","4–6 p.m.","6–8 p.m."];
+const DISPO={
+ "Valentina Chimachaná Cabrera":[[0],[0,1],[1,2],[1,2],[0]],
+ "Alan Riascos":[[5],[3],[2],[5],[4]],
+ "José Daniel Iturri Salazar":[[5],[5],[1],[1],[5]],
+ "Bryan Steven Ortega Marín":[[4],[3,4],[1,4],[3],[]],
+ "Ana Sofía Núñez Velásquez":[[4],[3],[1],[3],[]],
+ "Nicolle Valeria Arce Castro":[[2],[0],[0,1,2],[0],[0]],
+ "Luisa Fernanda Fernández":[[],[0,1],[0],[0],[5]],
+ "Marian Alexa Mera Ocampo":[[3],[4],[3],[1,2],[5]],
+ "Valentina Figueroa Andrade":[[1,2],[],[],[3,4],[1,2]]
+};
+
+/* ================= UTIL ================= */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const byId=id=>PAPERS.find(p=>p.id===id);
+const doi=d=>"https://doi.org/"+d;
+const CHEV='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+
+$$('nav.main button').forEach(b=>b.addEventListener('click',()=>{
+ $$('nav.main button').forEach(x=>x.setAttribute('aria-selected',x===b));
+ $$('main > section').forEach(s=>s.hidden = s.id!==b.dataset.tab);
+ window.scrollTo({top:0});
+}));
+
+/* ================= INICIO ================= */
+$('#lineasOut').innerHTML = Object.entries(LINEAS).map(([k,L])=>{
+ const g=INTEGRANTES.filter(i=>i.linea===k), np=PAPERS.filter(p=>p.linea===k).length;
+ return `<div class="card">
+  <div class="eyebrow">Línea ${L.abbr} · ${g.length} integrante${g.length>1?'s':''} · ${np} papers</div>
+  <h3>${esc(L.n)}</h3>
+  <p class="small" style="margin:8px 0 14px;color:var(--gris-o)">${esc(L.desc)}</p>
+  <div class="chips">${g.map(p=>`<span class="badge">${esc(p.n)}</span>`).join('')}</div>
+ </div>`;
+}).join('');
+
+$('#intOut').innerHTML = INTEGRANTES.map(i=>`<tr>
+ <td style="font-weight:600">${esc(i.n)}</td>
+ <td class="c-jour">${esc(i.prog)}</td>
+ <td class="c-year" style="font-family:var(--mono)">${i.sem}</td>
+ <td style="color:var(--gris-o);max-width:44ch">${esc(i.tema)}</td>
+ <td><span class="badge on">${esc(LINEAS[i.linea].n)}</span></td></tr>`).join('');
+
+/* ================= LITERATURA ================= */
+const S={g:'',sort:'t',dir:'asc',q:'',m:'',j:'',o:''};
+const uniq=f=>[...new Set(PAPERS.map(f))].sort((a,b)=>a.localeCompare(b,'es'));
+const OUTCATS=[
+ ["Violencia y crimen",p=>/homicid|crim|violen|delit/i.test(p.outcome)],
+ ["Empleo y salarios",p=>/salario|empleo|laboral|ingreso|ocupac/i.test(p.outcome)],
+ ["Educación y aprendizaje",p=>/escolar|aprendiz|puntaje|matrícula|educa|asistencia/i.test(p.outcome)],
+ ["Ahorro, crédito e inversión",p=>/ahorro|crédito|interés|inversión|financier|consumo|pobreza/i.test(p.outcome)],
+ ["Firmas e informalidad",p=>/firma|formal|empresa|negocio|ganancia|registro/i.test(p.outcome)],
+ ["Migración y desplazamiento",p=>/desplaz|migra|bienestar/i.test(p.outcome)]
+];
+const outcat=p=>{const h=OUTCATS.find(([,f])=>f(p));return h?h[0]:"Otros"};
+
+$('#litTabs').innerHTML = `<button class="chip" data-g="" aria-pressed="true">Todas · ${PAPERS.length}</button>`
+ + Object.entries(LINEAS).map(([k,L])=>`<button class="chip" data-g="${k}" aria-pressed="false">${esc(L.n)} · ${PAPERS.filter(p=>p.linea===k).length}</button>`).join('');
+$$('#litTabs .chip').forEach(c=>c.addEventListener('click',()=>{
+ S.g=c.dataset.g; $$('#litTabs .chip').forEach(x=>x.setAttribute('aria-pressed',x===c)); render();
+}));
+const fill=(el,label,vals)=>{el.innerHTML=`<option value="">${label}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join('')};
+fill($('#fm'),'Todas',uniq(p=>p.metodo));
+fill($('#fj'),'Todos',uniq(p=>p.journal));
+fill($('#fo'),'Todos',[...new Set(PAPERS.map(outcat))].sort((a,b)=>a.localeCompare(b,'es')));
+$('#fm').onchange=e=>{S.m=e.target.value;render()};
+$('#fj').onchange=e=>{S.j=e.target.value;render()};
+$('#fo').onchange=e=>{S.o=e.target.value;render()};
+$('#q').oninput=e=>{S.q=e.target.value.toLowerCase().trim();render()};
+$('#reset').onclick=()=>{
+ S.q=S.m=S.j=S.o=''; S.g='';
+ $('#q').value=''; $('#fm').value=$('#fj').value=$('#fo').value='';
+ $$('#litTabs .chip').forEach(x=>x.setAttribute('aria-pressed',x.dataset.g===''));
+ render();
+};
+
+function filtered(){
+ let r=PAPERS.filter(p=>
+  (!S.g||p.linea===S.g)&&(!S.m||p.metodo===S.m)&&(!S.j||p.journal===S.j)&&(!S.o||outcat(p)===S.o)&&
+  (!S.q||[p.titulo,p.autores,p.pregunta,p.outcome,p.metodoLargo,p.hallazgo,p.journal].join(' ').toLowerCase().includes(S.q)));
+ const k={t:p=>p.titulo,j:p=>p.journal,yr:p=>p.anio,out:p=>p.outcome,m:p=>p.metodo}[S.sort];
+ const d=S.dir==='asc'?1:-1;
+ return r.sort((a,b)=>{const x=k(a),y=k(b);return (typeof x==='number'?x-y:String(x).localeCompare(String(y),'es'))*d});
+}
+function rowHTML(p){
+ return `<tr class="row" data-i="${p.id}">
+  <td class="c-title"><div class="t-title">${esc(p.titulo)}</div><div class="t-au">${esc(p.autores)}</div></td>
+  <td class="c-jour">${esc(p.journal)}</td>
+  <td class="c-year" style="font-family:var(--mono)">${p.anio}</td>
+  <td><div class="t-out">${esc(p.outcome)}</div></td>
+  <td><span class="tag m">${esc(p.metodo)}</span></td>
+  <td class="c-doi"><a class="lnk" href="${doi(p.doi)}" target="_blank" rel="noopener">Ver<span class="sr"> ${esc(p.titulo)} en una pestaña nueva</span></a><span class="doi">${esc(p.doi)}</span></td>
+  <td><button class="exp-btn" type="button" aria-expanded="false" aria-controls="d-${p.id}"><span class="sr">Detalle de ${esc(p.titulo)}</span>${CHEV}</button></td>
+ </tr>
+ <tr class="detail" id="d-${p.id}" hidden><td colspan="7"><div class="d-grid">
+   <div>
+    <div class="d-h">Pregunta de investigación</div><p class="d-p" style="margin-bottom:16px">${esc(p.pregunta)}</p>
+    <div class="d-h">Estrategia de identificación</div><p class="d-p">${esc(p.metodoLargo)}</p>
+   </div>
+   <div>
+    <div class="d-box"><div class="d-h">Hallazgo principal</div><p>${esc(p.hallazgo)}</p></div>
+    <div class="d-box"><div class="d-h">Outcome</div><p>${esc(p.outcome)}</p></div>
+    <div class="d-box"><div class="d-h">Línea</div><p>${esc(LINEAS[p.linea].n)}</p></div>
+   </div>
+ </div></td></tr>`;
+}
+function render(){
+ const rows=filtered();
+ $('#count').innerHTML = rows.length?`<b>${rows.length}</b> de ${PAPERS.length} papers`:'Sin resultados';
+ $('#tbody').innerHTML = rows.map(rowHTML).join('');
+ $('#empty').hidden = rows.length>0; $('#tbl').hidden = rows.length===0;
+ $$('th[data-s]').forEach(th=>{
+  const on=th.dataset.s===S.sort;
+  th.setAttribute('aria-sort',on?(S.dir==='asc'?'ascending':'descending'):'none');
+  th.querySelector('.arrow').textContent = on?(S.dir==='asc'?'↑':'↓'):'↕';
+ });
+}
+$$('th[data-s] .th-btn').forEach(b=>b.addEventListener('click',()=>{
+ const k=b.closest('th').dataset.s;
+ if(S.sort===k) S.dir=S.dir==='asc'?'desc':'asc'; else {S.sort=k;S.dir='asc'}
+ render();
+}));
+$('#tbody').addEventListener('click',e=>{
+ const b=e.target.closest('.exp-btn'); if(!b) return;
+ const on=b.getAttribute('aria-expanded')==='true';
+ b.setAttribute('aria-expanded',!on);
+ document.getElementById(b.getAttribute('aria-controls')).hidden=on;
+});
+render();
+
+/* ================= EQUIPOS ================= */
+$('#eqOut').innerHTML = EQUIPOS.map(e=>`<div style="margin-bottom:var(--s6)">
+ <hr class="rule">
+ <div style="display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:baseline">
+  <div><div class="eyebrow">Equipo ${e.id} · ${e.miembros.length} integrantes</div><h2>${esc(e.nombre)}</h2></div>
+  <span class="badge on">${esc(LINEAS[e.linea].n)}</span>
+ </div>
+ <div class="chips" style="margin:var(--s3) 0">${e.miembros.map(m=>`<span class="badge">${esc(m)}</span>`).join('')}<span class="badge dot" style="color:var(--v4);border-color:#B7DCDF">Reunión: ${esc(e.hora)}</span></div>
+ <p class="lead" style="font-size:14.5px;margin-bottom:var(--s3)">${esc(e.comun)}</p>
+ <div class="tbl-scroll"><table>
+  <thead><tr><th class="plain">Papers candidatos</th><th class="plain" style="width:150px">Identificación</th><th class="plain" style="width:220px">Journal</th><th class="plain" style="width:70px">DOI</th></tr></thead>
+  <tbody>${e.candidatos.map(id=>{const p=byId(id);return `<tr>
+   <td><div class="t-title">${esc(p.titulo)}</div><div class="t-au">${esc(p.autores.split(',')[0])} et al., ${p.anio}</div></td>
+   <td><span class="tag m">${esc(p.metodo)}</span></td>
+   <td class="c-jour">${esc(p.journal)}</td>
+   <td><a class="lnk" href="${doi(p.doi)}" target="_blank" rel="noopener">Ver</a></td></tr>`}).join('')}</tbody>
+ </table></div></div>`).join('');
+
+/* ================= LECTURA / CRONOGRAMA ================= */
+$('#infoOut').innerHTML = INFOGRAFIA.map(([a,b,c])=>`<tr><td style="font-weight:600">${a}</td><td style="color:var(--gris-o)">${b}</td><td class="small">${c}</td></tr>`).join('');
+$('#p7Out').innerHTML = P7.map(([q,w],i)=>`<tr><td style="font-family:var(--mono);color:var(--azul)">${String(i+1).padStart(2,'0')}</td><td style="font-weight:600">${esc(q)}</td><td class="small">${esc(w)}</td></tr>`).join('');
+$('#cronoOut').innerHTML = CRONO.map(c=>`<div class="wk">
+ <div class="when"><div class="s">${c.s}</div><div class="d">${esc(c.f)}</div><div class="m"><span class="badge">${esc(c.ses)}</span></div></div>
+ <div><h3>${esc(c.t)}</h3><ul>${c.it.map(i=>`<li>${i}</li>`).join('')}</ul>
+ <p class="ent"><b>Entregable</b>${esc(c.e)}</p></div></div>`).join('');
+
+/* ================= HORARIOS ================= */
+$('#eqHoras').innerHTML = EQUIPOS.map(e=>`<div class="card">
+ <div class="eyebrow">Equipo ${e.id}</div><h3>${esc(e.hora)}</h3>
+ <p class="small" style="margin-top:8px;color:var(--gris-o)">${e.miembros.map(m=>esc(m.split(' ').slice(0,2).join(' '))).join(' · ')}</p></div>`).join('');
+
+(function mapa(){
+ const NOM=Object.keys(DISPO);
+ let h='<thead><tr><th class="plain"></th>'+FRANJAS.map(f=>`<th class="plain" style="text-align:center;font-family:var(--mono);font-weight:500">${f}</th>`).join('')+'</tr></thead><tbody>';
+ DIAS.forEach((d,di)=>{
+  h+=`<tr><th class="rowh plain">${d}</th>`;
+  FRANJAS.forEach((f,fi)=>{
+   const bloq = (di===2 && fi<=2);
+   const who=NOM.filter(n=>DISPO[n][di].includes(fi));
+   const c=who.length;
+   const cls = bloq?'hx':(c===0?'h0':c===1?'h1':c===2?'h2':c>=5?'h5':'h3');
+   const tt = bloq?'No disponible para el profesor':(c?esc(who.join(', ')):'Nadie');
+   h+=`<td class="cell"><span class="v ${cls}" title="${tt}">${bloq?'×':(c||'·')}</span></td>`;
+  });
+  h+='</tr>';
+ });
+ $('#mapaHoras').innerHTML=h+'</tbody>';
+})();
+
+/* ================= AVANCES ================= */
+const KEY="cienfi_semillero_avances_v2";
+const EST=["No iniciado","En proceso","Terminado"];
+const blank=()=>({paper:"",lectura:0,identificacion:0,infografia:0,pendientes:"",responsable:"",fecha:"",obs:"",enviado:""});
+let DB=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})();
+EQUIPOS.forEach(e=>{if(!DB[e.id])DB[e.id]=blank()});
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(DB))}catch(e){}};
+const pct=d=>Math.round(((d.paper?2:0)+d.lectura+d.identificacion+d.infografia)/8*100);
+const selHTML=(id,f,v)=>`<select data-eq="${id}" data-f="${f}">${EST.map((e,i)=>`<option value="${i}"${i==v?' selected':''}>${e}</option>`).join('')}</select>`;
+
+$('#endpointState').textContent = ENDPOINT ? "Conectado · los envíos se guardan y notifican" : "Sin endpoint configurado · solo borrador local";
+$('#endpointState').className = "sync"+(ENDPOINT?" ok":"");
+
+function renderAv(){
+ $('#avOut').innerHTML = EQUIPOS.map(e=>{
+  const d=DB[e.id], p=pct(d);
+  return `<div style="margin-bottom:var(--s6)"><hr class="rule">
+  <div style="display:flex;justify-content:space-between;gap:var(--s4);flex-wrap:wrap;align-items:flex-start;margin-bottom:var(--s4)">
+   <div><div class="eyebrow">Equipo ${e.id} · ${e.miembros.map(m=>esc(m.split(' ').slice(0,2).join(' '))).join(' · ')}</div><h2>${esc(e.nombre)}</h2></div>
+   <div style="min-width:200px"><div style="font-size:28px;font-weight:700;letter-spacing:-.03em;text-align:right">${p}%</div>
+    <div class="bar" style="margin-top:6px"><i style="width:${p}%"></i></div></div>
+  </div>
+  <div class="fgrid">
+   <div class="full field"><label>Paper seleccionado</label>
+    <select data-eq="${e.id}" data-f="paper"><option value="">— Sin escoger —</option>
+    ${e.candidatos.map(id=>{const q=byId(id);return `<option value="${id}"${d.paper===id?' selected':''}>${esc(q.titulo)} · ${esc(q.autores.split(',')[0])} ${q.anio}</option>`}).join('')}</select></div>
+   <div class="field"><label>Estado de lectura</label>${selHTML(e.id,'lectura',d.lectura)}</div>
+   <div class="field"><label>Análisis de identificación</label>${selHTML(e.id,'identificacion',d.identificacion)}</div>
+   <div class="field"><label>Avance de la infografía</label>${selHTML(e.id,'infografia',d.infografia)}</div>
+   <div class="field"><label>Responsable</label><input type="text" data-eq="${e.id}" data-f="responsable" value="${esc(d.responsable)}" placeholder="Nombre"></div>
+   <div class="field"><label>Última actualización</label><input type="date" data-eq="${e.id}" data-f="fecha" value="${esc(d.fecha)}"></div>
+   <div class="field"><label>Tareas pendientes</label><textarea data-eq="${e.id}" data-f="pendientes" placeholder="Una por línea">${esc(d.pendientes)}</textarea></div>
+   <div class="field"><label>Observaciones</label><textarea data-eq="${e.id}" data-f="obs" placeholder="Dudas, bloqueos, hallazgos">${esc(d.obs)}</textarea></div>
+  </div>
+  <div class="chips" style="margin-top:var(--s3)">
+   <button class="btn" type="button" data-send="${e.id}"${ENDPOINT?'':' disabled'}>Enviar reporte</button>
+   <span class="sync" data-flag="${e.id}">${d.enviado?'Último envío: '+esc(d.enviado):'Sin enviar'}</span>
+  </div>
+  ${d.paper?`<p class="small" style="margin-top:var(--s3)">${esc(byId(d.paper).metodo)} · <a href="${doi(byId(d.paper).doi)}" target="_blank" rel="noopener">doi.org/${esc(byId(d.paper).doi)}</a></p>`:''}
+  </div>`;
+ }).join('');
+ bind(); renderRes();
+}
+function renderRes(){
+ $('#resOut').innerHTML = EQUIPOS.map(e=>{
+  const d=DB[e.id],p=pct(d),q=d.paper?byId(d.paper):null;
+  return `<tr><td style="font-weight:600">${e.id}</td>
+  <td style="color:var(--gris-o);max-width:34ch">${q?esc(q.titulo):'<span class="small">sin escoger</span>'}</td>
+  <td><span class="st st${d.lectura}">${EST[d.lectura]}</span></td>
+  <td><span class="st st${d.infografia}">${EST[d.infografia]}</span></td>
+  <td>${esc(d.responsable)||'<span class="small">—</span>'}</td>
+  <td style="font-family:var(--mono);font-size:12px">${esc(d.fecha)||'—'}</td>
+  <td><div class="bar"><i style="width:${p}%"></i></div><span class="small" style="font-family:var(--mono)">${p}%</span></td></tr>`;
+ }).join('');
+}
+function bind(){
+ $$('#avOut [data-eq]').forEach(el=>{
+  el.addEventListener(el.tagName==='SELECT'?'change':'input',()=>{
+   const d=DB[el.dataset.eq],f=el.dataset.f;
+   d[f]=['lectura','identificacion','infografia'].includes(f)?+el.value:el.value;
+   if(f!=='fecha') d.fecha=new Date().toISOString().slice(0,10);
+   save();
+   if(el.tagName==='SELECT') renderAv(); else renderRes();
+  });
+ });
+ $$('#avOut [data-send]').forEach(b=>b.addEventListener('click',()=>enviar(b.dataset.send,b)));
+}
+async function enviar(id,btn){
+ const e=EQUIPOS.find(x=>x.id===id), d=DB[id], q=d.paper?byId(d.paper):null;
+ const flag=$(`[data-flag="${id}"]`);
+ const payload={equipo:id,nombre:e.nombre,linea:LINEAS[e.linea].n,integrantes:e.miembros.join(' · '),
+  paper:q?q.titulo:'',paper_autores:q?q.autores:'',paper_doi:q?q.doi:'',paper_metodo:q?q.metodo:'',
+  lectura:EST[d.lectura],identificacion:EST[d.identificacion],infografia:EST[d.infografia],
+  porcentaje:pct(d),responsable:d.responsable,fecha:d.fecha,pendientes:d.pendientes,observaciones:d.obs,
+  enviado_en:new Date().toISOString()};
+ btn.disabled=true; flag.className='sync'; flag.textContent='Enviando…';
+ try{
+  const r=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  d.enviado=new Date().toLocaleString('es-CO'); save();
+  flag.className='sync ok'; flag.textContent='Enviado · '+d.enviado;
+ }catch(err){
+  flag.className='sync err'; flag.textContent='No se pudo enviar. Exporta el .json y avisa al profesor.';
+ }finally{ btn.disabled=false; }
+}
+renderAv();
+
+$('#btnExport').onclick=()=>{
+ const b=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+ const a=document.createElement('a'); a.href=URL.createObjectURL(b);
+ a.download='avances-semillero-'+new Date().toISOString().slice(0,10)+'.json';
+ document.body.appendChild(a); a.click(); a.remove();
+};
+$('#btnImport').onclick=()=>$('#fileImport').click();
+$('#fileImport').onchange=ev=>{
+ const f=ev.target.files[0]; if(!f) return;
+ const r=new FileReader();
+ r.onload=()=>{try{const o=JSON.parse(r.result);EQUIPOS.forEach(e=>{if(o[e.id])DB[e.id]=Object.assign(blank(),o[e.id])});save();renderAv()}catch(e){alert('El archivo no se pudo leer.')}};
+ r.readAsText(f); ev.target.value='';
+};
+$('#btnReset').onclick=()=>{
+ if(!confirm('Esto borra el borrador guardado en este navegador. Lo ya enviado se conserva en la hoja de cálculo.')) return;
+ EQUIPOS.forEach(e=>DB[e.id]=blank()); save(); renderAv();
+};
+
+</script>
+</body>
+</html>
