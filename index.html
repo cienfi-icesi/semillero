@@ -152,9 +152,15 @@ ul.tight li{margin-bottom:6px}
 ul.tight li b,ul.tight li strong{color:var(--negro)}
 /* ---- cronograma ---- */
 .wk{display:grid;grid-template-columns:190px 1fr;gap:var(--s4);padding:var(--s4) 0;border-top:1px solid var(--borde)}
+.wk-now{background:var(--azul-bg);border-radius:var(--r-lg);padding-left:var(--s3);padding-right:var(--s3);border-top-color:#D6DEFB}
 .wk .when .s{font-size:17px;font-weight:700}
 .wk .when .d{font-family:var(--mono);font-size:11.5px;color:var(--gris);margin-top:3px}
 .wk .when .m{margin-top:10px}
+.wk .when .ses{list-style:none;margin:12px 0 0;padding:0}
+.wk .when .ses li{font-size:12.5px;line-height:1.4;color:var(--gris-o);padding:6px 10px;margin-bottom:5px;
+ background:var(--neutro);border:1px solid var(--borde);border-radius:6px;overflow-wrap:anywhere}
+.wk .when{min-width:0}
+.wk > div{min-width:0}
 .wk h3{margin-bottom:var(--s2)}
 .wk ul{margin:0 0 var(--s3);padding-left:18px;color:var(--gris-o);font-size:14px}
 .wk li{margin-bottom:6px}
@@ -511,30 +517,20 @@ footer.site{border-top:1px solid var(--borde);padding:var(--s5) 0;margin-top:var
   </div>
 
   <div class="block">
-   <div class="eyebrow">Restricción del profesor</div>
-   <hr class="rule">
-   <div class="card flat">
-    <h3>El miércoles por la mañana no está disponible</h3>
-    <p class="lead" style="margin-top:10px;font-size:14.5px">Era la única franja con concentración alta del semillero: <b>miércoles 9–11 a.m. reunía a 5 de 9</b>. Sin ella, ninguna franja de la semana pasa de <b>3 personas</b>, y reunir a los nueve a la vez deja de ser posible en una sola sesión — o incluso en tres.</p>
-    <p class="lead" style="margin-top:10px;font-size:14.5px">La consecuencia práctica: el semillero deja de organizarse alrededor de una sesión plenaria semanal y pasa a <b>tutorías por equipo</b>. Es un cambio afortunado: las cuatro franjas de equipo <b>no dependían del miércoles</b> y siguen intactas.</p>
-   </div>
-  </div>
-
-  <div class="block">
-   <div class="eyebrow">Tutorías por equipo · franja donde coinciden todos sus miembros</div>
+   <div class="eyebrow">Tutorías por equipo · 30 minutos dentro del bloque común</div>
    <hr class="rule">
    <div class="grid g4" id="eqHoras"></div>
    <div class="card" style="margin-top:var(--s3)">
     <div class="eyebrow">Propuesta de calendario semanal</div>
     <h3>El jueves es el día del semillero</h3>
-    <p class="lead" style="margin-top:10px;font-size:14.5px">Tres de los cuatro equipos pueden atenderse el mismo jueves, en bloques seguidos, y solo E2 queda aparte:</p>
+    <p class="lead" style="margin-top:10px;font-size:14.5px">Cada tutoría dura <b>30 minutos</b> y se ubica dentro del bloque que el equipo marcó en la encuesta. E4 y E3 quedan consecutivos, así que el jueves son 60 minutos seguidos en la mañana y media hora en la tarde:</p>
     <ul class="tight" style="margin-top:12px;font-size:14px">
-     <li><b>Jueves 7–9 a.m.</b> — E4 · Luisa y Nicolle</li>
-     <li><b>Jueves 9–11 a.m.</b> — E3 · Valentina Chimachaná y Marian</li>
-     <li><b>Jueves 2–4 p.m.</b> — E1 · Bryan, Ana Sofía y Valentina Figueroa</li>
-     <li><b>Lunes 6–8 p.m.</b> — E2 · Alan y José Daniel <span class="small">(única franja común de los dos)</span></li>
+     <li><b>Jueves 8:30–9:00 a.m.</b> — E4 · Luisa y Nicolle <span class="small">(cierre del bloque 7–9)</span></li>
+     <li><b>Jueves 9:00–9:30 a.m.</b> — E3 · Valentina Chimachaná y Marian <span class="small">(inicio del bloque 9–11)</span></li>
+     <li><b>Jueves 2:00–2:30 p.m.</b> — E1 · Bryan, Ana Sofía y Valentina Figueroa</li>
+     <li><b>Lunes 6:00–6:30 p.m.</b> — E2 · Alan y José Daniel <span class="small">(único bloque común de los dos)</span></li>
     </ul>
-    <p class="small" style="margin-top:12px">Ninguna de estas franjas tiene alternativa salvo E4 (martes 7–9 a.m.) y E3 (jueves 11 a.m.–1 p.m.). Si un equipo cambia de horario, deja de coincidir.</p>
+    <p class="small" style="margin-top:12px">Total: 2 horas de tutoría a la semana, en dos días. Los bloques admiten mover la media hora dentro de ellos; lo que no admiten es cambiar de bloque, porque fuera de ahí el equipo deja de coincidir. Margen disponible: E4 también puede martes 7–9 a.m. y E3 también jueves 11 a.m.–1 p.m.</p>
    </div>
   </div>
 
@@ -558,7 +554,7 @@ footer.site{border-top:1px solid var(--borde);padding:var(--s5) 0;margin-top:var
      <p class="lead" style="margin-top:10px;font-size:14.5px">No existe ningún trío que cubra a los nueve. Hacen falta cuatro, por ejemplo lunes 9–11 + martes 7–9 + martes 2–4 + jueves 9–11.</p>
     </div>
    </div>
-   <div class="warn" style="margin-top:var(--s3)"><b>Decisión pendiente.</b> Para el Referee Duel hace falta una única fecha con todo el semillero, y la encuesta no la contiene. Conviene fijarla como compromiso académico —jueves 1 de octubre, 2–4 p.m. es el punto de partida con más gente disponible— y pedir excepción a quienes no marcaron esa franja, en vez de seguir buscando una coincidencia que no existe.</div>
+   <div class="warn" style="margin-top:var(--s3)"><b>Decisión pendiente.</b> Para el Referee Duel hace falta una única fecha con todo el semillero, y la encuesta no la contiene. Conviene fijarla como compromiso académico —jueves 1 de octubre, 2:00–4:00 p.m. es el punto de partida con más gente disponible; el Referee Duel sí necesita las dos horas completas— y pedir excepción a quienes no marcaron esa franja, en vez de seguir buscando una coincidencia que no existe.</div>
   </div>
 
   <div class="block">
@@ -712,36 +708,36 @@ const EQUIPOS = [
  {id:"E1",nombre:"Narcotráfico, violencia y desplazamiento",linea:"crimen",
   miembros:["Bryan Steven Ortega Marín","Ana Sofía Núñez Velásquez","Valentina Figueroa Andrade"],
   comun:"Los tres eligieron crimen como primera opción. Bryan pregunta si el narcotráfico genera desarrollo o violencia; Ana Sofía propone el desplazamiento como el mecanismo hacia el mercado laboral. Valentina F. aporta el perfil econométrico.",
-  hora:"Jueves 2–4 p.m.", candidatos:["p1","p2","p3","p4","p9","p8","p5","p6"]},
+  hora:"Jueves 2:00–2:30 p.m.", candidatos:["p1","p2","p3","p4","p9","p8","p5","p6"]},
  {id:"E2",nombre:"Calidad escolar y retornos a la educación",linea:"educacion",
   miembros:["Alan Riascos","José Daniel Iturri Salazar"],
   comun:"Misma pregunta desde extremos opuestos del sistema: colegios públicos que superan a los privados, y educación superior de calidad en el Pacífico. Ambos en semestres tempranos: conviene un diseño visualmente claro (lotería o RD).",
-  hora:"Lunes 6–8 p.m.", candidatos:["p10","p11","p12","p13","p14","p15","p16","p17","p18"]},
+  hora:"Lunes 6:00–6:30 p.m.", candidatos:["p10","p11","p12","p13","p14","p15","p16","p17","p18"]},
  {id:"E3",nombre:"Género, sesgos y decisiones financieras",linea:"finanzas",
   miembros:["Valentina Chimachaná Cabrera","Marian Alexa Mera Ocampo"],
   comun:"Acceso al crédito con brecha de género y comportamiento en ahorro y deuda: es la misma literatura de restricciones y sesgos en finanzas de los hogares.",
-  hora:"Jueves 9–11 a.m. (alt.: 11 a.m.–1 p.m.)", candidatos:["p19","p20","p21","p22","p23","p24","p26","p27","p25"]},
+  hora:"Jueves 9:00–9:30 a.m.", candidatos:["p19","p20","p21","p22","p23","p24","p26","p27","p25"]},
  {id:"E4",nombre:"Informalidad, regulación y mercados poco estudiados",linea:"laboral",
   miembros:["Luisa Fernanda Fernández","Nicolle Valeria Arce Castro"],
   comun:"Luisa aporta la pregunta sobre mercados informales y regulación; Nicolle, el perfil cuantitativo más fuerte del semillero, lo que habilita papers con modelo estructural o RD.",
-  hora:"Jueves 7–9 a.m. (alt.: martes 7–9 a.m.)", candidatos:["p28","p29","p30","p31","p32","p33","p34","p35"]}
+  hora:"Jueves 8:30–9:00 a.m.", candidatos:["p28","p29","p30","p31","p32","p33","p34","p35"]}
 ];
 
 const CRONO = [
- {s:"Semana 1",f:"31 ago – 4 sep",t:"Equipos y elección del paper",
-  ses:"E2 lun 31 ago 6–8 p.m. · E4 jue 3 sep 7–9 a.m. · E3 jue 3 sep 9–11 a.m. · E1 jue 3 sep 2–4 p.m.",
+ {s:"Semana 1",f:"31 ago – 4 sep",now:true,t:"Equipos y elección del paper",
+  ses:"E2 lun 31 ago 6:00 p.m. · E4 jue 3 sep 8:30 a.m. · E3 jue 3 sep 9:00 a.m. · E1 jue 3 sep 2:00 p.m.",
   it:["<b>En la tutoría:</b> línea, equipo y taller de 20 min sobre cómo leer la sección de identificación.",
       "<b>Después:</b> cada equipo preselecciona tres papers de su línea.",
-      "<b>Vie 4:</b> paper registrado en Avances y pasada 1 completa."],
+      "<b>Vie 4:</b> el paper queda escogido y registrado en Avances, con la pasada 1 completa. Es el único entregable de la semana."],
   e:"Paper elegido + las tres frases de la pasada 1."},
  {s:"Semana 2",f:"7 – 11 sep",t:"Datos, metodología e identificación",
-  ses:"E2 lun 7 sep 6–8 p.m. · E4 jue 10 sep 7–9 a.m. · E3 jue 10 sep 9–11 a.m. · E1 jue 10 sep 2–4 p.m.",
+  ses:"E2 lun 7 sep 6:00 p.m. · E4 jue 10 sep 8:30 a.m. · E3 jue 10 sep 9:00 a.m. · E1 jue 10 sep 2:00 p.m.",
   it:["<b>Antes de la tutoría:</b> pasada 2 y ficha de identificación escrita.",
       "<b>En la tutoría:</b> el equipo explica en 5 min <em>solo</em> la variación que usa, con un dibujo. Sin resultados.",
       "<b>Después:</b> pasada 3: tabla principal, magnitud traducida y robustez."],
   e:"Ficha de identificación de una página + coeficiente interpretado."},
  {s:"Semana 3",f:"14 – 18 sep",t:"Resultados e infografía",
-  ses:"E2 lun 14 sep 6–8 p.m. · E4 jue 17 sep 7–9 a.m. · E3 jue 17 sep 9–11 a.m. · E1 jue 17 sep 2–4 p.m.",
+  ses:"E2 lun 14 sep 6:00 p.m. · E4 jue 17 sep 8:30 a.m. · E3 jue 17 sep 9:00 a.m. · E1 jue 17 sep 2:00 p.m.",
   it:["<b>Lun 14:</b> sorteo de roles del Referee Duel; cada equipo recibe el paper que deberá atacar.",
       "<b>Mar 15:</b> borrador con los once bloques obligatorios.",
       "<b>En la tutoría:</b> revisión del borrador — qué bloque no se entiende en 20 segundos.",
@@ -934,8 +930,10 @@ $('#eqOut').innerHTML = EQUIPOS.map(e=>`<div style="margin-bottom:var(--s6)">
 /* ================= LECTURA / CRONOGRAMA ================= */
 $('#infoOut').innerHTML = INFOGRAFIA.map(([a,b,c])=>`<tr><td style="font-weight:600">${a}</td><td style="color:var(--gris-o)">${b}</td><td class="small">${c}</td></tr>`).join('');
 $('#p7Out').innerHTML = P7.map(([q,w],i)=>`<tr><td style="font-family:var(--mono);color:var(--azul)">${String(i+1).padStart(2,'0')}</td><td style="font-weight:600">${esc(q)}</td><td class="small">${esc(w)}</td></tr>`).join('');
-$('#cronoOut').innerHTML = CRONO.map(c=>`<div class="wk">
- <div class="when"><div class="s">${c.s}</div><div class="d">${esc(c.f)}</div><div class="m"><span class="badge">${esc(c.ses)}</span></div></div>
+$('#cronoOut').innerHTML = CRONO.map(c=>`<div class="wk${c.now?' wk-now':''}">
+ <div class="when"><div class="s">${c.s}</div><div class="d">${esc(c.f)}</div>
+  ${c.now?'<div style="margin-top:8px"><span class="badge on dot">Semana en curso</span></div>':''}
+  <ul class="ses">${c.ses.split(' · ').map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
  <div><h3>${esc(c.t)}</h3><ul>${c.it.map(i=>`<li>${i}</li>`).join('')}</ul>
  <p class="ent"><b>Entregable</b>${esc(c.e)}</p></div></div>`).join('');
 
