@@ -610,13 +610,14 @@ footer.site{border-top:1px solid var(--borde);padding:var(--s5) 0;margin-top:var
    <h2>Dónde se guardan los reportes</h2>
    <p class="lead" style="margin:10px 0 var(--s3)">Los envíos van a una hoja de Google del semillero mediante un Apps Script, que además envía un correo en cada reporte nuevo. Todo queda en la cuenta de Icesi: sin servidor, sin terceros y sin costo.</p>
    <ol class="tight" style="font-size:14px">
-    <li>Crear una hoja de cálculo nueva en Google Drive.</li>
-    <li>Abrir <b>Extensiones → Apps Script</b> y pegar el contenido de <code>avances-backend.gs</code>.</li>
-    <li>Cambiar la constante <code>CORREO</code> por <code>efmartinez@icesi.edu.co</code>.</li>
-    <li><b>Implementar → Nueva implementación → Aplicación web</b>. Ejecutar como: yo. Acceso: cualquier usuario.</li>
-    <li>Copiar la URL <code>/exec</code> y pegarla abajo en <code>ENDPOINT</code> dentro de este archivo HTML.</li>
+    <li>Crear una hoja de cálculo en Google Drive y copiar su id: el tramo entre <code>/d/</code> y <code>/edit</code> en la barra de direcciones.</li>
+    <li>En el editor de Apps Script, pegar ese id en la constante <code>HOJA_ID</code> de <code>avances-backend.gs</code>, y revisar <code>CORREO</code>.</li>
+    <li>Ejecutar una vez la función <code>probar</code> desde el editor: autoriza los permisos de hoja y de correo, y escribe una fila de prueba.</li>
+    <li><b>Implementar → Administrar implementaciones → editar → Implementar</b> para publicar los cambios. Acceso: <b>Cualquier usuario</b> (no "con cuenta de Google": hay integrantes con correo personal).</li>
+    <li>La URL <code>/exec</code> ya está puesta en <code>ENDPOINT</code>, al inicio del script de este archivo.</li>
    </ol>
-   <p class="small" style="margin-top:var(--s3)">Mientras <code>ENDPOINT</code> esté vacío, la app sigue funcionando: guarda el borrador en el navegador del equipo y permite exportarlo en <code>.json</code>, pero no envía nada ni notifica.</p>
+   <p class="small" style="margin-top:var(--s3)">Si <code>HOJA_ID</code> queda vacío, el script solo funciona cuando vive <em>dentro</em> de una hoja (Extensiones → Apps Script). En un proyecto independiente hay que dar el id, o el envío falla con <code>getSheetByName of null</code>.</p>
+   <p class="small" style="margin-top:var(--s2)">Si <code>ENDPOINT</code> se deja vacío, la app sigue funcionando: guarda el borrador en el navegador del equipo y permite exportarlo en <code>.json</code>, pero no envía nada ni notifica.</p>
   </div>
  </div>
 </section>
@@ -694,7 +695,7 @@ const PAPERS = [
 /* ===================================================================
    CONFIGURACIÓN — pegar aquí la URL /exec del Apps Script (ver Avances)
    =================================================================== */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbwNTWinDoXNs7M5oRaWN39uT1fj1jIo9EGrf3BEyuzuozxlj0-LMbpGko2tcJ0eIcxM/exec";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwTFwZPpXTiUQejSYEHfXaFGrElnG8VdCjxF4T85Rp613SvZCaOTAgqlNUafqYR4_Ky/exec";
 
 /* ================= DATOS ================= */
 const LINEAS = {
