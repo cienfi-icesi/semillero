@@ -1,0 +1,12 @@
+# Datos personales de los estudiantes: no deben subirse a un repositorio público
+*.xlsx
+~$*
+
+# Material ajeno al aplicativo
+econometria/
+clase2.html
+Resumen_Greene_Cap5.pdf
+mercado_inmobiliario_revision.html
+
+.DS_Store
+.claude/
